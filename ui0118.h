@@ -18,42 +18,44 @@ typedef struct ui0118_widget_data_text ui0118_widget_data_text;
 
 typedef enum ui0118_widget_type
 {
-    UI0118_WIDGET_CONTAINER,
-    UI0118_WIDGET_TOGGLE,
-    UI0118_WIDGET_TOGGLE_MOM,
-    UI0118_WIDGET_LED_RED,
-    UI0118_WIDGET_LED_AMBER,
-    UI0118_WIDGET_ROTARY,
-    UI0118_WIDGET_TEXT,
+    UI0118_CONTAINER,
+    UI0118_TOGGLE,
+    UI0118_TOGGLE_MOM,
+    UI0118_LED_RED,
+    UI0118_LED_AMBER,
+    UI0118_ROTARY,
+    UI0118_TEXT,
     //UI0118_WIDGET_TEXT_INPUT
 } ui0118_widget_type;
 
 struct ui0118_widget_data_container
 {
-    ui0118_widget *child_top;
-    ui0118_widget *child_bottom;
-    unsigned int padding;
-    SDL_Color color_bg;
+    unsigned int size_x;
+    unsigned int size_y;
+    SDL_Color color;
 };
 
 struct ui0118_widget_data_toggle
 {
-    void (*trigger_up)(void *data);
-    void (*trigger_down)(void *data);
-    char state;
+    void (**trigger_up)(void *data);
+    void (**trigger_down)(void *data);
+    long state;
+    int count;
 };
 
 struct ui0118_widget_data_toggle_mom
 {
-    void (*trigger_up)(void *data);
-    void (*trigger_down)(void *data);
-    char state;
-    char orientation;
+    void (**trigger_up)(void *data);
+    void (**trigger_down)(void *data);
+    long state;
+    long orientation;
+    int count;
 };
 
 struct ui0118_widget_data_led
 {
-    char state;
+    long state;
+    int count;
 };
 
 struct ui0118_widget_data_rotary
@@ -67,7 +69,7 @@ struct ui0118_widget_data_text
 {
     char *text;
     unsigned int width;
-    char flags;
+    char line;
 };
 
 union ui0118_widget_data
@@ -86,9 +88,9 @@ struct ui0118_widget
     ui0118_widget *next;
     ui0118_widget_type type;
     ui0118_widget_data data;
-    int offset_x;
-    int offset_y;
-    int redraw_priority;
+    int x;
+    int y;
+    int layer;
 };
 
 struct ui0118_window
@@ -96,21 +98,11 @@ struct ui0118_window
     SDL_Window *window;
     SDL_Renderer *renderer;
     ui0118_widget *widget_top;
-    ui0118_widget *widget_bottom;
+    //SDL_Color color;
 };
  
 ui0118_window *ui0118_create_window(
     const char *title, unsigned int size_x, unsigned int size_y
 );
-
-int ui0118_redraw_window(ui0118_window *window, int priority);
-
-void ui0118_insert_widget(ui0118_widget *widget, ui0118_widget *prev);
-
-ui0118_widget *ui0118_create_widget_container(
-    unsigned int padding, SDL_Color color_bg
-);
-
-ui0118_widget *ui0118_create_widget_array(ui0118_widget *child);
 
 #endif

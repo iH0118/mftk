@@ -1,0 +1,33 @@
+[
+    {
+        "type" : "UI0118_CONTAINER",
+        "label" : "container_result",
+        "x" : 1,
+        "y" : 1,
+        "data" : {
+            "size_x" : 13,
+            "size_y" : 6,
+            "color" : [43, 2, 112, 255]
+        }
+    },
+    {
+        "type" : "UI0118_TEXT",
+        "label" : "label_carry",
+        "x" : 2,
+        "y" : 3,
+        "data" : {
+            "text" : "C",
+            "width" : 2,
+            "line" : false
+        }
+    },
+    {
+        "type" : "UI0118_LED_RED",
+        "label" : "led_carry",
+        "x" : 2,
+        "y" : 4,
+        "data" : {
+            "count" : 1
+        }
+    }
+]
