@@ -55,8 +55,8 @@
             "y" : 3,
             "data" : {
                 "start" : 15,
-                "step" : 1,
-                "end" : 0
+                "count" : 16,
+                "step" : -1
             }
         },
         {

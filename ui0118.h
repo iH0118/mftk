@@ -77,9 +77,9 @@ struct ui0118_widget_data_text
 
 struct ui0118_widget_data_text_count
 {
-    unsigned int start;
-    unsigned int step;
-    unsigned int end;
+    int start;
+    unsigned int count;
+    int step;
 };
 
 union ui0118_widget_data

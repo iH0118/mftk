@@ -1,6 +1,5 @@
 #include "ui0118.h"
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_pixels.h>
 #include <cjson/cJSON.h>
 #include <stdlib.h>
 
@@ -23,8 +22,8 @@ ui0118_window *ui0118_create_window(const char *title, unsigned int size_x,
     );
 
     window->renderer = SDL_CreateRenderer(window->window, -1, renderer_flags);
-
     window->widget_top = NULL;
+    window->color_bg = bg;
 
     return window;
 }
@@ -70,35 +69,46 @@ ui0118_widget *create_widget_from_node(cJSON *node)
         case UI0118_CONTAINER:
             widget->data.container.size_x = 
                 cJSON_GetObjectItem(data, "size_x")->valueint;
-
             widget->data.container.size_y =
                 cJSON_GetObjectItem(data, "size_y")->valueint;
-
-            SDL_Color color_bg;
-
-
-            widget->data.container.color = ; //TODO
+            widget->data.container.color = get_json_color(
+                cJSON_GetObjectItem(data, "color")
+            );
             break;
 
         case UI0118_TOGGLE:
+            //TODO
             break;
 
         case UI0118_TOGGLE_MOM:
+            //TODO
             break;
 
         case UI0118_LED_RED:
-            break;
-
         case UI0118_LED_AMBER:
+            widget->data.led.count =
+                cJSON_GetObjectItem(data, "count")->valueint;
             break;
 
         case UI0118_ROTARY:
             break;
 
         case UI0118_TEXT:
+            widget->data.text.text =
+                cJSON_GetObjectItem(data, "text")->valuestring;
+            widget->data.text.width =
+                cJSON_GetObjectItem(data, "width")->valueint;
+            widget->data.text.line =
+                cJSON_GetObjectItem(data, "line")->valueint;
             break;
 
         case UI0118_TEXT_COUNT:
+            widget->data.text_count.start =
+                cJSON_GetObjectItem(data, "start")->valueint;
+            widget->data.text_count.count =
+                cJSON_GetObjectItem(data, "count")->valueint;
+            widget->data.text_count.step =
+                cJSON_GetObjectItem(data, "step")->valueint;
             break;
     }
 
@@ -112,29 +122,11 @@ ui0118_window *ui0118_create_window_json(const char *restrict ui_json)
     cJSON *widgets_json = cJSON_GetObjectItem(root, "widgets");
     cJSON *node;
 
-    SDL_Color window_bg;
-
-    window_bg.r = cJSON_GetArrayItem(
-        cJSON_GetObjectItem(window_json, "color_bg"), 0
-    )->valueint;
-
-    window_bg.g = cJSON_GetArrayItem(
-        cJSON_GetObjectItem(window_json, "color_bg"), 1
-    )->valueint;
-
-    window_bg.b = cJSON_GetArrayItem(
-        cJSON_GetObjectItem(window_json, "color_bg"), 2
-    )->valueint;
-
-    window_bg.a = cJSON_GetArrayItem(
-        cJSON_GetObjectItem(window_json, "color_bg"), 3
-    )->valueint;
-
     ui0118_window *window = ui0118_create_window(
         cJSON_GetObjectItem(window_json, "title")->valuestring,
         cJSON_GetObjectItem(window_json, "size_x")->valueint,
         cJSON_GetObjectItem(window_json, "size_y")->valueint,
-        window_bg
+        get_json_color(cJSON_GetObjectItem(window_json, "color_bg"))
     );
 
     ui0118_widget **widget_next = &(window->widget_top);
