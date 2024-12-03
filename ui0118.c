@@ -1,5 +1,8 @@
 #include "ui0118.h"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_pixels.h>
+#include <SDL2/SDL_rect.h>
+#include <SDL2/SDL_render.h>
 #include <cjson/cJSON.h>
 #include <stdlib.h>
 
@@ -59,6 +62,8 @@ ui0118_widget *create_widget_from_node(cJSON *node)
         cJSON_GetObjectItem(node, "type")->valuestring
     );
 
+    widget->label = cJSON_GetObjectItem(node, "label")->valuestring;
+
     widget->x = cJSON_GetObjectItem(node, "x")->valueint;
     widget->y = cJSON_GetObjectItem(node, "y")->valueint;
 
@@ -67,7 +72,7 @@ ui0118_widget *create_widget_from_node(cJSON *node)
     switch (widget->type)
     {
         case UI0118_CONTAINER:
-            widget->data.container.size_x = 
+            widget->data.container.size_x =
                 cJSON_GetObjectItem(data, "size_x")->valueint;
             widget->data.container.size_y =
                 cJSON_GetObjectItem(data, "size_y")->valueint;
@@ -76,14 +81,10 @@ ui0118_widget *create_widget_from_node(cJSON *node)
             );
             break;
 
-        case UI0118_TOGGLE:
-            //TODO
-            break;
-
         case UI0118_TOGGLE_MOM:
-            //TODO
-            break;
-
+            widget->data.toggle_mom.orientation =
+                cJSON_GetObjectItem(data, "orientation")->valueint;
+        case UI0118_TOGGLE:
         case UI0118_LED_RED:
         case UI0118_LED_AMBER:
             widget->data.led.count =
@@ -124,8 +125,8 @@ ui0118_window *ui0118_create_window_json(const char *restrict ui_json)
 
     ui0118_window *window = ui0118_create_window(
         cJSON_GetObjectItem(window_json, "title")->valuestring,
-        cJSON_GetObjectItem(window_json, "size_x")->valueint,
-        cJSON_GetObjectItem(window_json, "size_y")->valueint,
+        cJSON_GetObjectItem(window_json, "width")->valueint,
+        cJSON_GetObjectItem(window_json, "height")->valueint,
         get_json_color(cJSON_GetObjectItem(window_json, "color_bg"))
     );
 
@@ -143,7 +144,68 @@ ui0118_window *ui0118_create_window_json(const char *restrict ui_json)
         widget_prev = widget;
     }
 
-    //TODO
-
     return window;
+}
+
+ui0118_widget *ui0118_get_widget(ui0118_window *window, const char *label)
+{
+    ui0118_widget *node = window->widget_top;
+    while (node && strcmp(node->label, label)) node = node->next;
+    return node;
+}
+
+void blit(SDL_Renderer *renderer, SDL_Texture *texture, int x, int y)
+{
+    SDL_Rect dest;
+    dest.x = x;
+    dest.y = y;
+    SDL_QueryTexture(texture, NULL, NULL, &dest.w, &dest.h);
+    SDL_RenderCopy(renderer, texture, NULL, &dest);
+}
+
+void ui0118_draw_window(ui0118_window *window)
+{
+    int x = 0;
+    int y = 0;
+
+    for (ui0118_widget *node = window->widget_top; node; node = node->next)
+    {
+        x += node->x;
+        y += node->y;
+
+        switch (node->type)
+        {
+            case UI0118_CONTAINER:
+                //TODO
+                break;
+
+            case UI0118_TOGGLE:
+                //TODO
+                break;
+
+            case UI0118_TOGGLE_MOM:
+                //TODO
+                break;
+
+            case UI0118_LED_RED:
+                //TODO
+                break;
+
+            case UI0118_LED_AMBER:
+                //TODO
+                break;
+
+            case UI0118_ROTARY:
+                //TODO
+                break;
+
+            case UI0118_TEXT:
+                //TODO
+                break;
+
+            case UI0118_TEXT_COUNT:
+                //TODO
+                break;
+        }
+    }
 }

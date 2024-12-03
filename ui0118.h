@@ -97,8 +97,9 @@ struct ui0118_widget
 {
     ui0118_widget *prev;
     ui0118_widget *next;
-    ui0118_widget_type type;
+    char *label;
     ui0118_widget_data data;
+    ui0118_widget_type type;
     int x;
     int y;
 };
@@ -116,5 +117,9 @@ ui0118_window *ui0118_create_window(const char *title, unsigned int size_x,
 );
 
 ui0118_window *ui0118_create_window_json(const char *ui_json);
+
+ui0118_widget *ui0118_get_widget(ui0118_window *window, const char *label);
+
+void ui0118_draw_window(ui0118_window *window);
 
 #endif
