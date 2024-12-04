@@ -1,22 +1,18 @@
-NAME = ui0118
+CC = gcc
+CFLAGS = -O -Wall -Wextra
 
-all: $(NAME) clean
+all: ui0118.a clean
 
 clean:
-	@rm -f *.o assets.c
+	rm -f *.o assets/*.c
 
-fclean: 
+ui0118_assets.c:
+	./make_assets.sh
 
-CC = gcc
-CFLAGS = -O -Wall -Wextra -Werror
-#LDFLAGS = -lSDL2 -lSDL2_image
-
-SRC = $(wildcard *.c)
-OBJ = $(SRC:.c=.o)
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(NAME): $(OBJ)
-	ar rcs $< $@
+ui0118.a: ui0118.o ui0118_assets.o
+	ar rcs $@ $^
 
 .PHONY: all clean
