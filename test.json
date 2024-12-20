@@ -3,7 +3,7 @@
         "title" : "test",
         "width" : 23,
         "height" : 19,
-        "color_bg" : [0, 0, 0, 255]
+        "color_bg" : [22, 31, 60, 255]
     },
     "widgets" : [
         {
@@ -13,8 +13,8 @@
             "y" : 1,
             "data" : {
                 "size_x" : 21,
-                "size_y" : 6,
-                "color" : [43, 2, 112, 255]
+                "size_y" : 8,
+                "color" : [29, 43, 80, 255]
             }
         },
         {
@@ -64,6 +64,15 @@
             "label" : "leds_result",
             "x" : 5,
             "y" : 4,
+            "data" : {
+                "count" : 8
+            }
+        },
+        {
+            "type" : "UI0118_TOGGLE",
+            "label" : "switches_test",
+            "x" : 5,
+            "y" : 6,
             "data" : {
                 "count" : 8
             }

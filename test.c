@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ui0118.h"
+//#include "ui0118_texture.h"
 
 int main(void)
 {
@@ -13,25 +14,22 @@ int main(void)
     fread(ui_json, sizeof(char), filesize, stream_ui_json);
     fclose(stream_ui_json);
 
+    SDL_Init(SDL_INIT_VIDEO);
+
     ui0118_window *window = ui0118_create_window_json(ui_json);
 
     free(ui_json);
 
-    while (1)
-    {
-        SDL_Event event;
+    ui0118_widget *switches = ui0118_get_widget(window, "switches_test");
+    ui0118_widget *leds = ui0118_get_widget(window, "leds_result");
 
-        while (SDL_PollEvent(&event)) {
-            switch (event.type)
-            {
-                case SDL_QUIT:
-                    exit(0);
-                    break;
+    while (1) {
+        ui0118_do_input(window);
 
-                default: 
-                    break;
-            }
-        }
+        leds->data.led.state = switches->data.toggle.state;
+
+        ui0118_draw_window(window);
+        SDL_RenderPresent(window->renderer);
     }
 
     return 0;
