@@ -2,8 +2,9 @@
 
 #include "texture.h"
 #include "util.h"
-
-#include "../include/ui0118.h" //temp
+#include "widget/container.h"
+#include "widget/toggle.h"
+#include "widget/led.h"
 
 ui0118_widget *ui0118_get_widget(ui0118_window *window, const char *label)
 {
@@ -27,7 +28,8 @@ ui0118_widget *create_widget_from_node(cJSON *node)
 
     cJSON *data = cJSON_GetObjectItem(node, "data");
 
-    switch (widget->type) {
+    switch (widget->type)
+    {
         case UI0118_CONTAINER:
         widget->data.container.size_x =
             cJSON_GetObjectItem(data, "size_x")->valueint;
@@ -79,72 +81,23 @@ ui0118_widget *create_widget_from_node(cJSON *node)
 
 void ui0118_draw_widget(ui0118_window *window, ui0118_widget *widget)
 {
-    switch (widget->type) {
+    switch (widget->type)
+    {
         case UI0118_CONTAINER:
-        draw_widget_container(
-            window->renderer, 
-            widget->x, 
-            widget->y,
-            widget->data.container.size_x, 
-            widget->data.container.size_y,
-            widget->data.container.color
-        );
+        draw_widget_container(window, widget);
         break;
 
         case UI0118_TOGGLE:
-        for (int i = 0; i < widget->data.toggle.count; i++) {
-            ui0118_blit(
-                window->renderer,
-                window->texture_set.toggle.base,
-                (widget->x + 2 * i) * UI0118_UNIT + 2,
-                widget->y * UI0118_UNIT + 1
-            );
-
-            ui0118_blit(
-                window->renderer,
-                widget->data.toggle.transition_state >>
-                    (widget->data.toggle.count - i) & 1
-                    ? window->texture_set.toggle.center
-                    : widget->data.toggle.state >>
-                        (widget->data.toggle.count - i) & 1
-                        ? window->texture_set.toggle.up
-                        : window->texture_set.toggle.down,
-                (widget->x + 2 * i) * UI0118_UNIT + 5,
-                widget->y * UI0118_UNIT + 1
-            );
-
-            if (!window->transition_counter) widget->data.toggle.transition_state = 0;
-        }
-        break;
-
         case UI0118_TOGGLE_MOM:
-        //TODO
-        break;
-
-        case UI0118_LED_RED:
-        for (int i = 0; i < widget->data.led.count; i++) {
-            ui0118_blit(
-                window->renderer,
-                widget->data.led.state >> (widget->data.led.count - i) & 1
-                    ? window->texture_set.led_red.on
-                    : window->texture_set.led_red.off,
-                (widget->x + 2 * i) * UI0118_UNIT + 2,
-                widget->y * UI0118_UNIT + 2
-            );
-        }
+        draw_widget_toggle(window, widget);
         break;
 
         case UI0118_LED_AMBER:
-        for (int i = 0; i < widget->data.led.count; i++) {
-            ui0118_blit(
-                window->renderer,
-                widget->data.led.state >> (widget->data.led.count - i) & 1
-                    ? window->texture_set.led_amber.on
-                    : window->texture_set.led_amber.off,
-                (widget->x + 2 * i) * UI0118_UNIT + 2,
-                widget->y * UI0118_UNIT + 2
-            );
-        }
+        draw_widget_led_amber(window, widget);
+        break;
+
+        case UI0118_LED_RED:
+        draw_widget_led_red(window, widget);
         break;
 
         case UI0118_ROTARY:

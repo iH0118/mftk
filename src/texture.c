@@ -260,55 +260,55 @@ void ui0118_init_textures(ui0118_window *window)
 
     window->texture_set.toggle.up = IMG_LoadTextureTyped_RW(
         window->renderer,
-        SDL_RWFromConstMem(toggle_up_png, toggle_up_png_len), 
-        1, 
+        SDL_RWFromConstMem(toggle_up_png, toggle_up_png_len),
+        1,
         filetype
     );
 
     window->texture_set.toggle.center = IMG_LoadTextureTyped_RW(
         window->renderer,
-        SDL_RWFromConstMem(toggle_center_png, toggle_center_png_len), 
+        SDL_RWFromConstMem(toggle_center_png, toggle_center_png_len),
         1, filetype
     );
 
     window->texture_set.toggle.down = IMG_LoadTextureTyped_RW(
         window->renderer,
-        SDL_RWFromConstMem(toggle_down_png, toggle_down_png_len), 
-        1, 
+        SDL_RWFromConstMem(toggle_down_png, toggle_down_png_len),
+        1,
         filetype
     );
 
     window->texture_set.led_red.on = IMG_LoadTextureTyped_RW(
         window->renderer,
-        SDL_RWFromConstMem(led_red_on_png, led_red_on_png_len), 
-        1, 
+        SDL_RWFromConstMem(led_red_on_png, led_red_on_png_len),
+        1,
         filetype
     );
 
     window->texture_set.led_red.off = IMG_LoadTextureTyped_RW(
         window->renderer,
-        SDL_RWFromConstMem(led_red_off_png, led_red_off_png_len), 
-        1, 
+        SDL_RWFromConstMem(led_red_off_png, led_red_off_png_len),
+        1,
         filetype
     );
 
     window->texture_set.led_amber.on = IMG_LoadTextureTyped_RW(
         window->renderer,
         SDL_RWFromConstMem(led_amber_on_png, led_amber_on_png_len),
-        1, 
+        1,
         filetype
     );
 
     window->texture_set.led_amber.off = IMG_LoadTextureTyped_RW(
         window->renderer,
         SDL_RWFromConstMem(led_amber_off_png, led_amber_off_png_len),
-        1, 
+        1,
         filetype
     );
 
     window->texture_set.led_small_red.on = IMG_LoadTextureTyped_RW(
         window->renderer,
-        SDL_RWFromConstMem(led_small_red_on_png, led_small_red_on_png_len), 
+        SDL_RWFromConstMem(led_small_red_on_png, led_small_red_on_png_len),
         1,
         filetype
     );
@@ -316,14 +316,14 @@ void ui0118_init_textures(ui0118_window *window)
     window->texture_set.led_small_red.off = IMG_LoadTextureTyped_RW(
         window->renderer,
         SDL_RWFromConstMem(led_small_red_off_png, led_small_red_off_png_len),
-        1, 
+        1,
         filetype
     );
 
     window->texture_set.led_small_amber.on = IMG_LoadTextureTyped_RW(
         window->renderer,
         SDL_RWFromConstMem(led_small_amber_on_png, led_small_amber_on_png_len),
-        1, 
+        1,
         filetype
     );
 
@@ -331,38 +331,40 @@ void ui0118_init_textures(ui0118_window *window)
         window->renderer,
         SDL_RWFromConstMem(
             led_small_amber_off_png, led_small_amber_off_png_len
-        ), 
-        1, 
+        ),
+        1,
         filetype
         );
 
     window->texture_set.rotary.base = IMG_LoadTextureTyped_RW(
         window->renderer,
-        SDL_RWFromConstMem(rotary_base_png, rotary_base_png_len), 
-        1, 
+        SDL_RWFromConstMem(rotary_base_png, rotary_base_png_len),
+        1,
         filetype
     );
 
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < 16; i++)
+    {
         window->texture_set.rotary.dial[i] = IMG_LoadTextureTyped_RW(
             window->renderer,
             SDL_RWFromConstMem(rotary_dial_png[i], rotary_dial_png_len[i]),
-            1, 
+            1,
             filetype
         );
     }
 
-    for (int i = 0; i < 95; i++) {
+    for (int i = 0; i < 95; i++)
+    {
         window->texture_set.letter[i] = IMG_LoadTextureTyped_RW(
             window->renderer,
-            SDL_RWFromConstMem(text_png[i], text_png_len[i]), 
+            SDL_RWFromConstMem(text_png[i], text_png_len[i]),
             1,
             filetype
         );
     }
 }
 
-void ui0118_blit(SDL_Renderer *renderer, SDL_Texture *texture, int x, int y)
+void blit(SDL_Renderer *renderer, SDL_Texture *texture, int x, int y)
 {
     SDL_Rect dest;
     dest.x = x;

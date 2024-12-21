@@ -71,7 +71,7 @@ struct ui0118_widget_data_toggle {
     //void (**trigger_up)(void *data);
     //void (**trigger_down)(void *data);
     long state;
-    long transition_state;
+    long trans_state;
     int count;
 };
 
@@ -79,7 +79,7 @@ struct ui0118_widget_data_toggle_mom {
     //void (**trigger_up)(void *data);
     //void (**trigger_down)(void *data);
     long state;
-    long transition_state;
+    long trans_state;
     long orientation;
     int count;
 };
@@ -133,7 +133,7 @@ struct ui0118_window {
     ui0118_widget *widget_top;
     ui0118_texture_set texture_set;
     SDL_Color color_bg;
-    unsigned int transition_counter;
+    unsigned int trans_counter;
 };
 
 #endif

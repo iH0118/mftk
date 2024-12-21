@@ -47,7 +47,8 @@ ui0118_window *ui0118_create_window_json(const char *ui_json)
     ui0118_widget **widget_next = &(window->widget_top);
     ui0118_widget *widget_prev = NULL;
 
-    for (node = widgets_json->child; node; node = node->next) {
+    for (node = widgets_json->child; node; node = node->next)
+    {
         ui0118_widget *widget = create_widget_from_node(node);
 
         *widget_next = widget;
@@ -72,9 +73,10 @@ void ui0118_draw_window(ui0118_window *window)
 
     SDL_RenderClear(window->renderer);
 
-    for (ui0118_widget *node = window->widget_top; node; node = node->next) {
+    for (ui0118_widget *node = window->widget_top; node; node = node->next)
+    {
         ui0118_draw_widget(window, node);
     }
 
-    if (window->transition_counter) window->transition_counter -= 1;
+    if (window->trans_counter) window->trans_counter -= 1;
 }

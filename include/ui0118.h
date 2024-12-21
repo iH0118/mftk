@@ -17,11 +17,4 @@ void ui0118_draw_window(ui0118_window *window);
 
 void ui0118_do_input(ui0118_window *window);
 
-//void ui0118_init_textures(ui0118_window *window);
-
-//void blit(SDL_Renderer *renderer, SDL_Texture *texture, int x, int y);
-
-void draw_widget_container(SDL_Renderer *renderer, int x, int y,
-    int size_x, int size_y, SDL_Color color);
-
 #endif
