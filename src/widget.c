@@ -1,6 +1,5 @@
 #include "widget.h"
 
-#include "texture.h"
 #include "util.h"
 #include "widget/container.h"
 #include "widget/toggle.h"
