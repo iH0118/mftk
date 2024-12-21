@@ -2,6 +2,8 @@
 
 A UI toolkit inspired by 1960s mainframe control panels, written in C using SDL2
 
+Dependencies: SDL2, SDL2_image, cJSON
+
 ## TODO:
   + write proper README
   + document code
