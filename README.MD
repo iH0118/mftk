@@ -10,8 +10,5 @@ A UI toolkit inspired by 1960s mainframe control panels, written in C using SDL2
   + add pushbutton widget
     + draw pushbutton textures
   + add rotary switch widget
-  + implement text rendering
-    + add text widget
-    + add text count widget
-    + add text input widget (maybe)
+  + add text input widget (maybe)
   + implement error messages (maybe)
