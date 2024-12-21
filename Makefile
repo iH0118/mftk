@@ -2,15 +2,13 @@ CC:=gcc
 CFLAGS:=-O -Wall -Wextra
 
 OUTPUT:=build/ui0118.a
-
-#SRCS=$(wildcard src/*.c) $(wildcard src/widget/*.c)
 SRCS:=$(shell find src -name '*.c')
-OBJS:=$(patsubst src/%.c,build/%.o,$(SRCS)) #ui0118.o ui0118_texture.o ui0118_widget.o ui0118_util.o ui0118_window.o
+OBJS:=$(patsubst src/%.c,build/%.o,$(SRCS))
 
 build: $(OUTPUT)
 
 builddirs:
-	mkdir build build/widget
+	mkdir -p build build/widget
 
 test: build test/test.c
 	$(CC) $(CFLAGS) -lSDL2 -lSDL2_image -lcjson -g test/test.c build/ui0118.a -o test/a.out
