@@ -1,7 +1,7 @@
 #ifndef INCLUDE_UI0118_UTIL_H
 #define INCLUDE_UI0118_UTIL_H
 
-#include "ui0118_common.h"
+#include "common.h"
 
 SDL_Color get_json_color(cJSON *color_json);
 

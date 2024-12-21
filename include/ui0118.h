@@ -2,7 +2,7 @@
 #define INCLUDE_UI0118_H
 
 #include <SDL2/SDL.h>
-#include "ui0118_types.h"
+#include "types.h"
 
 ui0118_window *ui0118_create_window(const char *title, unsigned int size_x,
     unsigned int size_y, SDL_Color bg);

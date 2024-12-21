@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd textures
+cd ../res
 rm -f *.c #*.h
 for dir in */; do
     dir=${dir%*/}

@@ -1,4 +1,5 @@
-#include "ui0118_common.h"
+#include "../include/ui0118.h"
+#include "common.h"
 
 void draw_widget_container(SDL_Renderer *renderer, int x, int y,
     int size_x, int size_y, SDL_Color color)

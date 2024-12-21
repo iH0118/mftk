@@ -1,4 +1,4 @@
-#include "ui0118_util.h"
+#include "util.h"
 
 SDL_Color get_json_color(cJSON *color_json)
 {

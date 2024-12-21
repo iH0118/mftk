@@ -1,9 +1,9 @@
-#include "ui0118_widget.h"
+#include "widget.h"
 
-#include "ui0118_texture.h"
-#include "ui0118_util.h"
+#include "texture.h"
+#include "util.h"
 
-#include "ui0118.h" //temp
+#include "../include/ui0118.h" //temp
 
 ui0118_widget *ui0118_get_widget(ui0118_window *window, const char *label)
 {

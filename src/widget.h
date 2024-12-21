@@ -1,7 +1,7 @@
 #ifndef INCLUDE_UI0118_WIDGET_H
 #define INCLUDE_UI0118_WIDGET_H
 
-#include "ui0118_common.h"
+#include "common.h"
 
 ui0118_widget *ui0118_get_widget(ui0118_window *window, const char *label);
 

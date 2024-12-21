@@ -1,10 +1,10 @@
-#include "ui0118_texture.h"
+#include "texture.h"
 
-#include "textures/textures_container.c"
-#include "textures/textures_led.c"
-#include "textures/textures_rotary.c"
-#include "textures/textures_text.c"
-#include "textures/textures_toggle.c"
+#include "../res/textures_container.c"
+#include "../res/textures_led.c"
+#include "../res/textures_rotary.c"
+#include "../res/textures_text.c"
+#include "../res/textures_toggle.c"
 
 const unsigned char *rotary_dial_png[] = {
     rotary_0_png,

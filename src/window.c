@@ -1,8 +1,8 @@
-#include "ui0118_window.h"
+#include "window.h"
 
-#include "ui0118_texture.h"
-#include "ui0118_util.h"
-#include "ui0118_widget.h"
+#include "texture.h"
+#include "util.h"
+#include "widget.h"
 
 ui0118_window *ui0118_create_window(const char *title, unsigned int size_x,
     unsigned int size_y, SDL_Color bg)
@@ -16,8 +16,8 @@ ui0118_window *ui0118_create_window(const char *title, unsigned int size_x,
         title,
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
-        (int) size_x * UI0118_UNIT + 1,
-        (int) size_y * UI0118_UNIT + 1,
+        size_x * UI0118_UNIT + 1,
+        size_y * UI0118_UNIT + 1,
         0
     );
 

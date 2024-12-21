@@ -1,28 +1,37 @@
-CC = gcc
-CFLAGS = -O -Wall -Wextra
+CC:=gcc
+CFLAGS:=-O -Wall -Wextra
 
-all: ui0118.a clean
+OUTPUT:=build/ui0118.a
+
+SRCS:=$(wildcard src/*.c)
+OBJS:=$(patsubst src/%.c,build/%.o,$(SRCS)) #ui0118.o ui0118_texture.o ui0118_widget.o ui0118_util.o ui0118_window.o
+
+build: $(OUTPUT)
+
+build/:
+	mkdir -p build
 
 clean:
-	rm -f *.o
+	rm -f $(wildcard build/*.o)
 
-make_textures:
+clean_all: clean
+	rm -f build/ui0118.a
+
+src/ui0118_texture.c: src/ui0118_texture.h $(wildcard textures/*) src/ui0118_common.h
 	./make_textures.sh
 
-ui0118_texture.c: textures/* make_textures
+#ui0118_util.c: ui0118_util.h ui0118_common.h
 
-ui0118_util.c: ui0118_widget.c ui0118_util.c ui0118_window.c
+#ui0118_widget.c: ui0118_widget.h ui0118_util.c ui0118_texture.c ui0118_common.h
 
-ui0118_widget.c: ui0118_util.c
+#ui0118_window.c: ui0118_window.h ui0118_texture.c ui0118_util.h ui0118_widget.c ui0118_common.h
 
-ui0118_window.c: ui0118_texture.c
+src/%.c: src/%.h
 
-%.c: %.h
-
-%.o: %.c
+$(OBJS): $(SRCS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-ui0118.a: ui0118.o ui0118_texture.o ui0118_widget.o ui0118_util.o ui0118_window.o
+$(OUTPUT): $(OBJS)
 	ar rcs $@ $^
 
-.PHONY: all clean make_textures
+.PHONY: build clean
