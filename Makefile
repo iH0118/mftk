@@ -7,9 +7,6 @@ OBJS:=$(patsubst src/%.c,build/%.o,$(SRCS))
 
 build: $(OUTPUT)
 
-builddirs:
-	mkdir -p build build/widget
-
 test: build test/test.c
 	$(CC) $(CFLAGS) -lSDL2 -lSDL2_image -lcjson -g test/test.c build/ui0118.a -o test/a.out
 
@@ -26,7 +23,8 @@ src/%.c:: src/%.h src/ui0118_common.h
 src/ui0118_texture.c: $(wildcard textures/*)
 	./make_textures.sh
 
-build/%.o: src/%.c builddirs
+build/%.o: src/%.c
+	mkdir -p build build/widget
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(OUTPUT): $(OBJS)
