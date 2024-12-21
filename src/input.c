@@ -1,5 +1,6 @@
 #include "input.h"
 
+#include "../include/types.h"
 #include "widget/toggle.h"
 
 void ui0118_do_input(ui0118_window *window)
@@ -16,9 +17,22 @@ void ui0118_do_input(ui0118_window *window)
 
         for (node = window->widget_top; node; node = node->next)
         {
-            if (node->type == UI0118_TOGGLE)
+            switch (node->type)
             {
+                case UI0118_TOGGLE:
                 do_input_toggle(window, node, mouse_x, mouse_y, &event);
+                break;
+
+                case UI0118_TOGGLE_MOM:
+                //TODO
+                break;
+
+                case UI0118_ROTARY:
+                //TODO
+                break;
+
+                default:
+                break;
             }
         }
     }
