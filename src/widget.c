@@ -4,6 +4,7 @@
 #include "widget/container.h"
 #include "widget/toggle.h"
 #include "widget/led.h"
+#include "widget/text.h"
 
 ui0118_widget *ui0118_get_widget(ui0118_window *window, const char *label)
 {
@@ -104,11 +105,11 @@ void ui0118_draw_widget(ui0118_window *window, ui0118_widget *widget)
         break;
 
         case UI0118_TEXT:
-        //TODO
+        draw_widget_text(window, widget);
         break;
 
         case UI0118_TEXT_COUNT:
-        //TODO
+        draw_widget_text_count(window, widget);
         break;
     }
 }

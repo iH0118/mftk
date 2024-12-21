@@ -98,7 +98,7 @@ struct ui0118_widget_data_rotary {
 struct ui0118_widget_data_text {
     char *text;
     unsigned int width;
-    char line;
+    char line : 1;
 };
 
 struct ui0118_widget_data_text_count {

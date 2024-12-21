@@ -22,3 +22,9 @@ ui0118_widget_type get_widget_type(const char *type)
     if (!strcmp(type, "UI0118_TEXT_COUNT")) return UI0118_TEXT_COUNT;
     return -1;
 }
+
+int get_number_digits(int n)
+{
+    if (n / 10) return get_number_digits(n / 10) + 1;
+    return 0;
+}
