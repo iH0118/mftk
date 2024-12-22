@@ -37,9 +37,9 @@ void draw_widget_text(ui0118_window *window, ui0118_widget *widget)
 
         SDL_SetRenderDrawColor(window->renderer, 255, 255, 255, 255);
         SDL_RenderDrawLine(window->renderer, x_start1, y_bot, x_start1, y_top);
-        SDL_RenderDrawLine(window->renderer, x_start1, y_top, x_end1  , y_top);
-        SDL_RenderDrawLine(window->renderer, x_start2, y_top, x_end2  , y_top);
-        SDL_RenderDrawLine(window->renderer, x_end2  , y_top, x_end2  , y_bot);
+        SDL_RenderDrawLine(window->renderer, x_start1, y_top, x_end1,   y_top);
+        SDL_RenderDrawLine(window->renderer, x_start2, y_top, x_end2,   y_top);
+        SDL_RenderDrawLine(window->renderer, x_end2,   y_top, x_end2,   y_bot);
     }
 }
 
@@ -47,16 +47,22 @@ void draw_widget_text_count(ui0118_window *window, ui0118_widget *widget)
 {
     for (unsigned int i = 0; i < widget->data.text_count.count; i++)
     {
-        int number = widget->data.text_count.count + 1 - i;
+        int number = widget->data.text_count.start +
+            i * widget->data.text_count.step;
         int text_len = get_number_digits(number);
         int center_x = (widget->x + 2 * i + 1) * UI0118_UNIT;
-        int start_x = center_x - 2 - 3 * (text_len - 1);
+        int start_x = center_x - 2 - 3 * (text_len);
 
-        for (int k = text_len - 1; k >= 0; k--) blit(
-            window->renderer,
-            window->texture_set.letter[number % 10 + '0' - 0x20],
-            start_x + 6 * k,
-            widget->y * UI0118_UNIT + 2
-        );
+        for (int k = text_len; k >= 0; k--) 
+        {
+            blit(
+                window->renderer,
+                window->texture_set.letter[(number % 10) + '0' - 0x20],
+                start_x + 6 * k,
+                widget->y * UI0118_UNIT + 2
+            );
+
+            number /= 10;
+        }
     }
 }
