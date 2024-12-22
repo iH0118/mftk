@@ -31,9 +31,9 @@ void draw_widget_container(ui0118_window *window, ui0118_widget *widget)
         {x_left  + 1, y_bottom - 2},
         {x_left,      y_bottom - 5},
         {x_left,      y_top    + 5},
-        {x_left + 1,  y_top    + 2},
-        {x_left + 2,  y_top    + 1},
-        {x_left + 5,  y_top       }
+        {x_left  + 1, y_top    + 2},
+        {x_left  + 2, y_top    + 1},
+        {x_left  + 5, y_top       }
     };
 
     SDL_SetRenderDrawColor(
