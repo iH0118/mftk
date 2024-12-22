@@ -7,11 +7,13 @@ OBJS:=$(patsubst src/%.c,build/%.o,$(SRCS))
 
 build: $(OUTPUT)
 
-test: build test/test.c
-	$(CC) $(CFLAGS) -lSDL2 -lSDL2_image -lcjson -g test/test.c build/ui0118.a -o test/a.out
+test/a.out: test/test.c $(OUTPUT)
+	$(CC) $(CFLAGS) -lSDL2 -lSDL2_image -lcjson -g $^ -o $@
+
+test: test/a.out
 
 test_run: test
-	cd test; ./a.out
+	@cd test; ./a.out
 
 clean:
 	rm -f $(wildcard build/*.o)
@@ -27,10 +29,10 @@ src/ui0118_texture.c: $(wildcard textures/*)
 	./make_textures.sh
 
 build/%.o: src/%.c
-	-mkdir -p build build/widget
+	@mkdir -p build build/widget
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(OUTPUT): $(OBJS)
 	ar rcs $@ $^
 
-.PHONY: build builddirs test test_run clean clean_all
+.PHONY: build test test_run clean clean_all
