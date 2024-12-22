@@ -1,6 +1,5 @@
 #include "input.h"
 
-#include "../include/types.h"
 #include "widget/toggle.h"
 
 void ui0118_do_input(ui0118_window *window)
