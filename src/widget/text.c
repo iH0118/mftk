@@ -31,7 +31,7 @@ void draw_widget_text(ui0118_window *window, ui0118_widget *widget)
         int y_bot = widget->y * UI0118_UNIT+ 9;
         int x_start1 = widget->x * UI0118_UNIT + 2;
         int x_end1 = start_x - 4;
-        int x_start2 = start_x + 3 + 6 * text_len;
+        int x_start2 = start_x + 2 + 6 * text_len;
         int x_end2 =
             (widget->x + widget->data.text.width) * UI0118_UNIT - 2;
 
