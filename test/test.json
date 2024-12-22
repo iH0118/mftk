@@ -2,7 +2,7 @@
     "window" : {
         "title" : "test",
         "width" : 23,
-        "height" : 19,
+        "height" : 20,
         "color_bg" : [22, 31, 60, 255]
     },
     "widgets" : [
@@ -13,7 +13,7 @@
             "y" : 1,
             "data" : {
                 "size_x" : 21,
-                "size_y" : 8,
+                "size_y" : 18,
                 "color" : [29, 43, 80, 255]
             }
         },
@@ -69,12 +69,132 @@
             }
         },
         {
-            "type" : "UI0118_TOGGLE",
-            "label" : "switches_test",
+            "type" : "UI0118_TEXT",
+            "label" : "label_op_a",
             "x" : 5,
             "y" : 6,
             "data" : {
+                "text" : "OPERAND A",
+                "width" : 16,
+                "line" : true
+            }
+        },
+        {
+            "type" : "UI0118_TEXT_COUNT",
+            "label" : "label_op_a_bits",
+            "x" : 5,
+            "y" : 7,
+            "data" : {
+                "start" : 7,
+                "count" : 8,
+                "step" : -1
+            }
+        },
+        {
+            "type" : "UI0118_LED_AMBER",
+            "label" : "leds_op_a",
+            "x" : 5,
+            "y" : 8,
+            "data" : {
                 "count" : 8
+            }
+        },
+        {
+            "type" : "UI0118_TOGGLE",
+            "label" : "switches_op_a",
+            "x" : 5,
+            "y" : 10,
+            "data" :  {
+                "count" : 8
+            }
+        },
+        {
+            "type" : "UI0118_TEXT",
+            "label" : "label_op_b",
+            "x" : 5,
+            "y" : 12,
+            "data" : {
+                "text" : "OPERAND B",
+                "width" : 16,
+                "line" : true
+            }
+        },
+        {
+            "type" : "UI0118_TEXT_COUNT",
+            "label" : "label_op_b_bits",
+            "x" : 5,
+            "y" : 13,
+            "data" : {
+                "start" : 7,
+                "count" : 8,
+                "step" : -1
+            }
+        },
+        {
+            "type" : "UI0118_LED_AMBER",
+            "label" : "leds_op_b",
+            "x" : 5,
+            "y" : 14,
+            "data" : {
+                "count" : 8
+            }
+        },
+        {
+            "type" : "UI0118_TOGGLE",
+            "label" : "switches_op_b",
+            "x" : 5,
+            "y" : 16,
+            "data" :  {
+                "count" : 8
+            }
+        },
+        {
+            "type" : "UI0118_LED_RED",
+            "label" : "led_add",
+            "x" : 2,
+            "y" : 9,
+            "data" : {
+                "count" : 1
+            }
+        },
+        {
+            "type" : "UI0118_TEXT",
+            "label" : "label_add",
+            "x" : 2,
+            "y" : 8,
+            "data" : {
+                "text" : "ADD",
+                "width" : 2,
+                "line" : false
+            }
+        },
+        {
+            "type" : "UI0118_TOGGLE",
+            "label" : "switch_add_sub",
+            "x" : 2,
+            "y" : 11,
+            "data" :  {
+                "count" : 1
+            }
+        },
+        {
+            "type" : "UI0118_TEXT",
+            "label" : "label_sub",
+            "x" : 2,
+            "y" : 15,
+            "data" : {
+                "text" : "SUB",
+                "width" : 2,
+                "line" : false
+            }
+        },
+        {
+            "type" : "UI0118_LED_RED",
+            "label" : "led_sub",
+            "x" : 2,
+            "y" : 13,
+            "data" : {
+                "count" : 1
             }
         }
     ]
