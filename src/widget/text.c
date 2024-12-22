@@ -28,7 +28,7 @@ void draw_widget_text(ui0118_window *window, ui0118_widget *widget)
     if (widget->data.text.line)
     {
         int y_top = widget->y * UI0118_UNIT + 5;
-        int y_bot = widget->y * UI0118_UNIT+ 9;
+        int y_bot = y_top + 4;
         int x_start1 = widget->x * UI0118_UNIT + 2;
         int x_end1 = start_x - 4;
         int x_start2 = start_x + 2 + 6 * text_len;
