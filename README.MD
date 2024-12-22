@@ -2,7 +2,23 @@
 
 A UI toolkit inspired by 1960s mainframe control panels, written in C using SDL2
 
-Dependencies: SDL2, SDL2_image, cJSON
+## Dependencies: 
+  + SDL2
+  + SDL2_image
+  + cJSON
+
+## Make targets
+  + __build__
+    + default target
+    + builds the library
+  + __test__
+    + builds the test program
+  + __test_run__
+    + builds and runs the test program
+  + __clean__
+    + removes intermediate object files
+  + __clean_all__
+    + removes all object files
 
 ## TODO:
   + write proper README
