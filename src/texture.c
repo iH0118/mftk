@@ -242,7 +242,7 @@ const unsigned int text_png_len[] = {
 
 static const char filetype[] = "PNG";
 
-void ui0118_init_textures(ui0118_window *window)
+void mftk_init_textures(mftk_window *window)
 {
     window->texture_set.container.screw = IMG_LoadTextureTyped_RW(
         window->renderer,

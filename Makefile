@@ -1,7 +1,7 @@
 CC:=gcc
 CFLAGS:=-O -Wall -Wextra
 
-OUTPUT:=build/ui0118.a
+OUTPUT:=build/mftk.a
 SRCS:=$(shell find src -name '*.c')
 OBJS:=$(patsubst src/%.c,build/%.o,$(SRCS))
 
@@ -21,12 +21,12 @@ clean:
 	rm -f test/a.out
 
 clean_all: clean
-	rm -f build/ui0118.a
+	rm -f build/mftk.a
 
-src/%.c:: src/%.h src/ui0118_common.h
+src/%.c:: src/%.h src/mftk_common.h
 
-src/ui0118_texture.c: $(wildcard textures/*)
-	./make_textures.sh
+src/mftk_texture.c: $(wildcard textures/*)
+	util/make_textures.sh
 
 build/%.o: src/%.c
 	@mkdir -p build build/widget

@@ -2,15 +2,15 @@
 
 #include "../texture.h"
 
-void draw_widget_container(ui0118_window *window, ui0118_widget *widget)
+void draw_widget_container(mftk_window *window, mftk_widget *widget)
 {
     SDL_Texture *screw = window->texture_set.container.screw;
 
-    int size_x_u = widget->data.container.size_x * UI0118_UNIT;
-    int size_y_u = widget->data.container.size_y * UI0118_UNIT;
-    int x_left   = widget->x * UI0118_UNIT;
+    int size_x_u = widget->data.container.size_x * MFTK_UNIT;
+    int size_y_u = widget->data.container.size_y * MFTK_UNIT;
+    int x_left   = widget->x * MFTK_UNIT;
     int x_right  = x_left + size_x_u + 1;
-    int y_top    = widget->y * UI0118_UNIT;
+    int y_top    = widget->y * MFTK_UNIT;
     int y_bottom = y_top + size_y_u + 1;
 
     SDL_Rect rect1 = {x_left + 1, y_top + 2, size_x_u - 1, size_y_u - 2};

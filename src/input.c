@@ -2,13 +2,13 @@
 
 #include "widget/toggle.h"
 
-void ui0118_do_input(ui0118_window *window)
+void mftk_do_input(mftk_window *window)
 {
     int mouse_x, mouse_y;
     SDL_GetMouseState(&mouse_x, &mouse_y);
 
     SDL_Event event;
-    ui0118_widget *node;
+    mftk_widget *node;
 
     while (SDL_PollEvent(&event))
     {
@@ -18,15 +18,15 @@ void ui0118_do_input(ui0118_window *window)
         {
             switch (node->type)
             {
-                case UI0118_TOGGLE:
+                case MFTK_TOGGLE:
                 do_input_toggle(window, node, mouse_x, mouse_y, &event);
                 break;
 
-                case UI0118_TOGGLE_MOM:
+                case MFTK_TOGGLE_MOM:
                 //TODO
                 break;
 
-                case UI0118_ROTARY:
+                case MFTK_ROTARY:
                 //TODO
                 break;
 

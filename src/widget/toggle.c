@@ -2,35 +2,35 @@
 
 #include "../texture.h"
 
-void draw_widget_toggle(ui0118_window *window, ui0118_widget *widget)
+void draw_widget_toggle(mftk_window *window, mftk_widget *widget)
 {
     for (int i = 0; i < widget->data.toggle.count; i++)
     {
+        long state_offset = widget->data.toggle.count - i - 1;
+
         blit(
             window->renderer,
             window->texture_set.toggle.base,
-            (widget->x + 2 * i) * UI0118_UNIT + 2,
-            widget->y * UI0118_UNIT + 1
+            (widget->x + 2 * i) * MFTK_UNIT + 2,
+            widget->y * MFTK_UNIT + 1
         );
 
         blit(
             window->renderer,
-            widget->data.toggle.trans_state >>
-                (widget->data.toggle.count - i - 1) & 1
+            (widget->data.toggle.trans_state >> state_offset) & 1
                 ? window->texture_set.toggle.center
-                : widget->data.toggle.state >>
-                    (widget->data.toggle.count - i - 1) & 1
+                : (widget->data.toggle.state >> state_offset) & 1
                     ? window->texture_set.toggle.up
                     : window->texture_set.toggle.down,
-            (widget->x + 2 * i) * UI0118_UNIT + 5,
-            widget->y * UI0118_UNIT + 1
+            (widget->x + 2 * i) * MFTK_UNIT + 5,
+            widget->y * MFTK_UNIT + 1
         );
 
         if (!window->trans_counter) widget->data.toggle.trans_state = 0;
     }
 }
 
-void do_input_toggle(ui0118_window *window, ui0118_widget *node,
+void do_input_toggle(mftk_window *window, mftk_widget *widget,
     int mouse_x, int mouse_y, SDL_Event *event)
 {
     if (event->type != SDL_MOUSEBUTTONDOWN && event->type != SDL_MOUSEWHEEL)
@@ -38,14 +38,14 @@ void do_input_toggle(ui0118_window *window, ui0118_widget *node,
         return;
     }
 
-    for (int i = 0; i < node->data.toggle.count; i++)
+    for (int i = 0; i < widget->data.toggle.count; i++)
     {
-        int dx = mouse_x - (node->x + 1 + 2 * i) * UI0118_UNIT;
-        int dy = mouse_y - (node->y + 1) * UI0118_UNIT;
+        int dx = mouse_x - (widget->x + 1 + 2 * i) * MFTK_UNIT;
+        int dy = mouse_y - (widget->y + 1) * MFTK_UNIT;
 
-        if (dx * dx + dy * dy <= UI0118_TOGGLE_RADIUS2)
+        if (dx * dx + dy * dy <= MFTK_TOGGLE_RADIUS2)
         {
-            long state_prev = node->data.toggle.state;
+            long state_prev = widget->data.toggle.state;
 
             if (event->type == SDL_MOUSEBUTTONDOWN)
             {
@@ -53,13 +53,13 @@ void do_input_toggle(ui0118_window *window, ui0118_widget *node,
                 {
                     /* left click: toggle individual switch on*/
                     case 1:
-                    node->data.toggle.state ^= 1 <<
-                        (node->data.toggle.count - i - 1);
+                    widget->data.toggle.state ^= 1 <<
+                        (widget->data.toggle.count - i - 1);
                     break;
 
                     /* middle click: reset row of switches to 0 */
                     case 2:
-                    node->data.toggle.state = 0;
+                    widget->data.toggle.state = 0;
                     break;
                 }
             }
@@ -69,19 +69,22 @@ void do_input_toggle(ui0118_window *window, ui0118_widget *node,
                 /* scroll up: increase switch row value*/
                 if (event->wheel.y > 0)
                 {
-                    node->data.toggle.state = (node->data.toggle.state + 1) %
-                        (1 << node->data.toggle.count);
+                    widget->data.toggle.state =
+                        (widget->data.toggle.state + 1) %
+                        (1 << widget->data.toggle.count);
                 }
 
                 /* scroll down: decrease switch row value*/
                 else if (event->wheel.y < 0)
                 {
-                    node->data.toggle.state = (node->data.toggle.state - 1) %
-                        (1 << node->data.toggle.count);
+                    widget->data.toggle.state =
+                        (widget->data.toggle.state - 1) %
+                        (1 << widget->data.toggle.count);
                 }
             }
 
-            node->data.toggle.trans_state = node->data.toggle.state ^ state_prev;
+            widget->data.toggle.trans_state =
+                widget->data.toggle.state ^ state_prev;
             window->trans_counter = TRANSITION_TIME;
         }
     }

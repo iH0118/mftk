@@ -1,8 +1,8 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/ui0118.h"
-//#include "ui0118_texture.h"
+#include "../include/mftk.h"
+//#include "mftk_texture.h"
 
 int main(void)
 {
@@ -16,25 +16,25 @@ int main(void)
 
     SDL_Init(SDL_INIT_VIDEO);
 
-    ui0118_window *window = ui0118_create_window_json(ui_json);
+    mftk_window *window = mftk_create_window_json(ui_json);
 
     free(ui_json);
 
-    ui0118_widget *sw_op_a = ui0118_get_widget(window, "switches_op_a");
-    ui0118_widget *sw_op_b = ui0118_get_widget(window, "switches_op_b");
-    ui0118_widget *sw_add_sub = ui0118_get_widget(window, "switch_add_sub");
-    ui0118_widget *led_carry = ui0118_get_widget(window, "led_carry");
-    ui0118_widget *leds_result = ui0118_get_widget(window, "leds_result");
-    ui0118_widget *leds_op_a = ui0118_get_widget(window, "leds_op_a");
-    ui0118_widget *leds_op_b = ui0118_get_widget(window, "leds_op_b");
-    ui0118_widget *led_add = ui0118_get_widget(window, "led_add");
-    ui0118_widget *led_sub = ui0118_get_widget(window, "led_sub");
+    mftk_widget *sw_op_a = mftk_get_widget(window, "switches_op_a");
+    mftk_widget *sw_op_b = mftk_get_widget(window, "switches_op_b");
+    mftk_widget *sw_add_sub = mftk_get_widget(window, "switch_add_sub");
+    mftk_widget *led_carry = mftk_get_widget(window, "led_carry");
+    mftk_widget *leds_result = mftk_get_widget(window, "leds_result");
+    mftk_widget *leds_op_a = mftk_get_widget(window, "leds_op_a");
+    mftk_widget *leds_op_b = mftk_get_widget(window, "leds_op_b");
+    mftk_widget *led_add = mftk_get_widget(window, "led_add");
+    mftk_widget *led_sub = mftk_get_widget(window, "led_sub");
 
     sw_add_sub->data.toggle.state = 1;
 
     while (1)
     {
-        ui0118_do_input(window);
+        mftk_do_input(window);
 
         led_add->data.led.state = sw_add_sub->data.toggle.state;
         led_sub->data.led.state = !sw_add_sub->data.toggle.state;
@@ -49,7 +49,7 @@ int main(void)
         leds_result->data.led.state = result;
         led_carry->data.led.state = result >> 8;
 
-        ui0118_draw_window(window);
+        mftk_draw_window(window);
         SDL_RenderPresent(window->renderer);
     }
 

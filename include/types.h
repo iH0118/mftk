@@ -1,22 +1,22 @@
-#ifndef INCLUDE_UI0118_TYPES_H
-#define INCLUDE_UI0118_TYPES_H
+#ifndef INCLUDE_MFTK_TYPES_H
+#define INCLUDE_MFTK_TYPES_H
 
 #include <SDL2/SDL.h>
 
-typedef struct ui0118_window ui0118_window;
-typedef struct ui0118_widget ui0118_widget;
-typedef union ui0118_widget_data ui0118_widget_data;
-typedef struct ui0118_widget_data_container ui0118_widget_data_container;
-typedef struct ui0118_widget_data_toggle ui0118_widget_data_toggle;
-typedef struct ui0118_widget_data_toggle_mom ui0118_widget_data_toggle_mom;
-typedef struct ui0118_widget_data_led ui0118_widget_data_led;
-typedef struct ui0118_widget_data_rotary ui0118_widget_data_rotary;
-typedef struct ui0118_widget_data_text ui0118_widget_data_text;
-typedef struct ui0118_widget_data_text_count ui0118_widget_data_text_count;
-typedef struct ui0118_texture_set ui0118_texture_set;
-//typedef struct ui0118_widget_data_text_input ui0118_widget_data_text_input;
+typedef struct mftk_window mftk_window;
+typedef struct mftk_widget mftk_widget;
+typedef union mftk_widget_data mftk_widget_data;
+typedef struct mftk_widget_data_container mftk_widget_data_container;
+typedef struct mftk_widget_data_toggle mftk_widget_data_toggle;
+typedef struct mftk_widget_data_toggle_mom mftk_widget_data_toggle_mom;
+typedef struct mftk_widget_data_led mftk_widget_data_led;
+typedef struct mftk_widget_data_rotary mftk_widget_data_rotary;
+typedef struct mftk_widget_data_text mftk_widget_data_text;
+typedef struct mftk_widget_data_text_count mftk_widget_data_text_count;
+typedef struct mftk_texture_set mftk_texture_set;
+//typedef struct mftk_widget_data_text_input mftk_widget_data_text_input;
 
-struct ui0118_texture_set {
+struct mftk_texture_set {
     struct {
         SDL_Texture *screw;
     } container;
@@ -49,25 +49,25 @@ struct ui0118_texture_set {
     SDL_Texture *letter[95];
 };
 
-typedef enum ui0118_widget_type {
-    UI0118_CONTAINER,
-    UI0118_TOGGLE,
-    UI0118_TOGGLE_MOM,
-    UI0118_LED_RED,
-    UI0118_LED_AMBER,
-    UI0118_ROTARY,
-    UI0118_TEXT,
-    UI0118_TEXT_COUNT,
-    //UI0118_WIDGET_TEXT_INPUT
-} ui0118_widget_type;
+typedef enum mftk_widget_type {
+    MFTK_CONTAINER,
+    MFTK_TOGGLE,
+    MFTK_TOGGLE_MOM,
+    MFTK_LED_RED,
+    MFTK_LED_AMBER,
+    MFTK_ROTARY,
+    MFTK_TEXT,
+    MFTK_TEXT_COUNT,
+    //MFTK_WIDGET_TEXT_INPUT
+} mftk_widget_type;
 
-struct ui0118_widget_data_container {
+struct mftk_widget_data_container {
     unsigned int size_x;
     unsigned int size_y;
     SDL_Color color;
 };
 
-struct ui0118_widget_data_toggle {
+struct mftk_widget_data_toggle {
     //void (**trigger_up)(void *data);
     //void (**trigger_down)(void *data);
     long state;
@@ -75,7 +75,7 @@ struct ui0118_widget_data_toggle {
     int count;
 };
 
-struct ui0118_widget_data_toggle_mom {
+struct mftk_widget_data_toggle_mom {
     //void (**trigger_up)(void *data);
     //void (**trigger_down)(void *data);
     long state;
@@ -84,54 +84,54 @@ struct ui0118_widget_data_toggle_mom {
     int count;
 };
 
-struct ui0118_widget_data_led {
+struct mftk_widget_data_led {
     long state;
     int count;
 };
 
-struct ui0118_widget_data_rotary {
+struct mftk_widget_data_rotary {
     //void (*trigger_up)(void *data);
     //void (*trigger_down)(void *data);
     char state;
 };
 
-struct ui0118_widget_data_text {
+struct mftk_widget_data_text {
     char *text;
     unsigned int width;
     char line : 1;
 };
 
-struct ui0118_widget_data_text_count {
+struct mftk_widget_data_text_count {
     int start;
     unsigned int count;
     int step;
 };
 
-union ui0118_widget_data {
-    ui0118_widget_data_container container;
-    ui0118_widget_data_toggle toggle;
-    ui0118_widget_data_toggle_mom toggle_mom;
-    ui0118_widget_data_led led;
-    ui0118_widget_data_rotary rotary;
-    ui0118_widget_data_text text;
-    ui0118_widget_data_text_count text_count;
+union mftk_widget_data {
+    mftk_widget_data_container container;
+    mftk_widget_data_toggle toggle;
+    mftk_widget_data_toggle_mom toggle_mom;
+    mftk_widget_data_led led;
+    mftk_widget_data_rotary rotary;
+    mftk_widget_data_text text;
+    mftk_widget_data_text_count text_count;
 };
 
-struct ui0118_widget {
-    ui0118_widget *prev;
-    ui0118_widget *next;
+struct mftk_widget {
+    mftk_widget *prev;
+    mftk_widget *next;
     char *label;
-    ui0118_widget_data data;
-    ui0118_widget_type type;
+    mftk_widget_data data;
+    mftk_widget_type type;
     int x;
     int y;
 };
 
-struct ui0118_window {
+struct mftk_window {
     SDL_Window *window;
     SDL_Renderer *renderer;
-    ui0118_widget *widget_top;
-    ui0118_texture_set texture_set;
+    mftk_widget *widget_top;
+    mftk_texture_set texture_set;
     SDL_Color color_bg;
     unsigned int trans_counter;
 };

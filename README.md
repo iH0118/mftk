@@ -1,4 +1,4 @@
-# __ui0118__
+# __mftk__
 
 A UI toolkit inspired by 1960s mainframe control panels, written in C using SDL2
 

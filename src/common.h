@@ -1,5 +1,5 @@
-#ifndef UI0118_COMMON_H
-#define UI0118_COMMON_H
+#ifndef MFTK_COMMON_H
+#define MFTK_COMMON_H
 
 #include <cjson/cJSON.h>
 #include <stdlib.h>
@@ -7,9 +7,9 @@
 #include <SDL2/SDL.h>
 #include "../include/types.h"
 
-#define UI0118_UNIT 11
-#define UI0118_TOGGLE_RADIUS2 (10 * 10)
-#define UI0118_ROTARY_RADIUS2 (38 * 38)
+#define MFTK_UNIT 11
+#define MFTK_TOGGLE_RADIUS2 (10 * 10)
+#define MFTK_ROTARY_RADIUS2 (38 * 38)
 #define TRANSITION_TIME 3
 
 #endif

@@ -1,21 +1,22 @@
 #include "widget.h"
 
+#include <string.h>
 #include "util.h"
 #include "widget/container.h"
 #include "widget/toggle.h"
 #include "widget/led.h"
 #include "widget/text.h"
 
-ui0118_widget *ui0118_get_widget(ui0118_window *window, const char *label)
+mftk_widget *mftk_get_widget(mftk_window *window, const char *label)
 {
-    ui0118_widget *node = window->widget_top;
+    mftk_widget *node = window->widget_top;
     while (node && strcmp(node->label, label)) node = node->next;
     return node;
 }
 
-ui0118_widget *create_widget_from_node(cJSON *node)
+mftk_widget *create_widget_from_node(cJSON *node)
 {
-    ui0118_widget *widget = calloc(1, sizeof(ui0118_widget));
+    mftk_widget *widget = calloc(1, sizeof(mftk_widget));
 
     widget->type = get_widget_type(
         cJSON_GetObjectItem(node, "type")->valuestring
@@ -30,7 +31,7 @@ ui0118_widget *create_widget_from_node(cJSON *node)
 
     switch (widget->type)
     {
-        case UI0118_CONTAINER:
+        case MFTK_CONTAINER:
         widget->data.container.size_x =
             cJSON_GetObjectItem(data, "size_x")->valueint;
         widget->data.container.size_y =
@@ -40,33 +41,33 @@ ui0118_widget *create_widget_from_node(cJSON *node)
         );
         break;
 
-        case UI0118_TOGGLE:
+        case MFTK_TOGGLE:
         widget->data.toggle.count =
             cJSON_GetObjectItem(data, "count")->valueint;
         break;
 
-        case UI0118_TOGGLE_MOM:
+        case MFTK_TOGGLE_MOM:
         widget->data.toggle_mom.orientation =
             cJSON_GetObjectItem(data, "orientation")->valueint;
         widget->data.toggle_mom.count =
             cJSON_GetObjectItem(data, "count")->valueint;
         break;
 
-        case UI0118_LED_RED:
-        case UI0118_LED_AMBER:
+        case MFTK_LED_RED:
+        case MFTK_LED_AMBER:
         widget->data.led.count = cJSON_GetObjectItem(data, "count")->valueint;
         break;
 
-        case UI0118_ROTARY:
+        case MFTK_ROTARY:
         break;
 
-        case UI0118_TEXT:
+        case MFTK_TEXT:
         widget->data.text.text = cJSON_GetObjectItem(data, "text")->valuestring;
         widget->data.text.width = cJSON_GetObjectItem(data, "width")->valueint;
         widget->data.text.line = cJSON_GetObjectItem(data, "line")->valueint;
         break;
 
-        case UI0118_TEXT_COUNT:
+        case MFTK_TEXT_COUNT:
         widget->data.text_count.start =
             cJSON_GetObjectItem(data, "start")->valueint;
         widget->data.text_count.count =
@@ -79,36 +80,36 @@ ui0118_widget *create_widget_from_node(cJSON *node)
     return widget;
 }
 
-void ui0118_draw_widget(ui0118_window *window, ui0118_widget *widget)
+void mftk_draw_widget(mftk_window *window, mftk_widget *widget)
 {
     switch (widget->type)
     {
-        case UI0118_CONTAINER:
+        case MFTK_CONTAINER:
         draw_widget_container(window, widget);
         break;
 
-        case UI0118_TOGGLE:
-        case UI0118_TOGGLE_MOM:
+        case MFTK_TOGGLE:
+        case MFTK_TOGGLE_MOM:
         draw_widget_toggle(window, widget);
         break;
 
-        case UI0118_LED_AMBER:
+        case MFTK_LED_AMBER:
         draw_widget_led_amber(window, widget);
         break;
 
-        case UI0118_LED_RED:
+        case MFTK_LED_RED:
         draw_widget_led_red(window, widget);
         break;
 
-        case UI0118_ROTARY:
+        case MFTK_ROTARY:
         //TODO
         break;
 
-        case UI0118_TEXT:
+        case MFTK_TEXT:
         draw_widget_text(window, widget);
         break;
 
-        case UI0118_TEXT_COUNT:
+        case MFTK_TEXT_COUNT:
         draw_widget_text_count(window, widget);
         break;
     }
