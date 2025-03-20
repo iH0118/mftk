@@ -8,7 +8,7 @@ OBJS:=$(patsubst src/%.c,build/%.o,$(SRCS))
 build: $(OUTPUT)
 
 test/a.out: test/test.c $(OUTPUT)
-	$(CC) $(CFLAGS) -lSDL2 -lSDL2_image -lcjson -g $^ -o $@
+	$(CC) $(CFLAGS) -g $^ -o $@ -lSDL2 -lSDL2_image -lcjson
 
 test: test/a.out
 
