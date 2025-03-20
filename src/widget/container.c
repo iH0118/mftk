@@ -2,7 +2,10 @@
 
 #include "../texture.h"
 
-void draw_widget_container(mftk_window *window, mftk_widget *widget)
+void draw_widget_container(
+    mftk_window *window,
+    mftk_widget *widget
+)
 {
     SDL_Texture *screw = window->texture_set.container.screw;
 

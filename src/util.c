@@ -2,7 +2,9 @@
 
 #include <string.h>
 
-SDL_Color get_json_color(cJSON *color_json)
+SDL_Color get_json_color(
+    cJSON *color_json
+)
 {
     SDL_Color color;
     color.r = cJSON_GetArrayItem(color_json, 0)->valueint;
@@ -12,7 +14,9 @@ SDL_Color get_json_color(cJSON *color_json)
     return color;
 }
 
-mftk_widget_type get_widget_type(const char *type)
+mftk_widget_type get_widget_type(
+    const char *type
+)
 {
     if (!strcmp(type, "MFTK_CONTAINER" )) return MFTK_CONTAINER;
     if (!strcmp(type, "MFTK_TOGGLE"    )) return MFTK_TOGGLE;
@@ -25,7 +29,9 @@ mftk_widget_type get_widget_type(const char *type)
     return -1;
 }
 
-int get_number_digits(int n)
+int get_number_digits(
+    int n
+)
 {
     if (n / 10) return get_number_digits(n / 10) + 1;
     return 0;

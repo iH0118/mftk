@@ -5,7 +5,10 @@
 #include "../util.h"
 #include <SDL2/SDL_render.h>
 
-void draw_widget_text(mftk_window *window, mftk_widget *widget)
+void draw_widget_text(
+    mftk_window *window,
+    mftk_widget *widget
+)
 {
     int text_len = strlen(widget->data.text.text);
     int center_x = widget->x * MFTK_UNIT +
@@ -44,7 +47,10 @@ void draw_widget_text(mftk_window *window, mftk_widget *widget)
     }
 }
 
-void draw_widget_text_count(mftk_window *window, mftk_widget *widget)
+void draw_widget_text_count(
+    mftk_window *window,
+    mftk_widget *widget
+)
 {
     for (unsigned int i = 0; i < widget->data.text_count.count; i++)
     {

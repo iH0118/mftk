@@ -7,14 +7,19 @@
 #include "widget/led.h"
 #include "widget/text.h"
 
-mftk_widget *mftk_get_widget(mftk_window *window, const char *label)
+mftk_widget *mftk_get_widget(
+    mftk_window *window,
+    const char  *label
+)
 {
     mftk_widget *node = window->widget_top;
     while (node && strcmp(node->label, label)) node = node->next;
     return node;
 }
 
-mftk_widget *create_widget_from_node(cJSON *node)
+mftk_widget *create_widget_from_node(
+    cJSON *node
+)
 {
     mftk_widget *widget = calloc(1, sizeof(mftk_widget));
 
@@ -80,7 +85,10 @@ mftk_widget *create_widget_from_node(cJSON *node)
     return widget;
 }
 
-void mftk_draw_widget(mftk_window *window, mftk_widget *widget)
+void mftk_draw_widget(
+    mftk_window *window,
+    mftk_widget *widget
+)
 {
     switch (widget->type)
     {

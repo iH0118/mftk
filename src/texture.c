@@ -242,7 +242,9 @@ const unsigned int text_png_len[] = {
 
 static const char filetype[] = "PNG";
 
-void mftk_init_textures(mftk_window *window)
+void mftk_init_textures(
+    mftk_window *window
+)
 {
     window->texture_set.container.screw = IMG_LoadTextureTyped_RW(
         window->renderer,
@@ -364,7 +366,12 @@ void mftk_init_textures(mftk_window *window)
     }
 }
 
-void blit(SDL_Renderer *renderer, SDL_Texture *texture, int x, int y)
+void blit(
+    SDL_Renderer *renderer,
+    SDL_Texture  *texture,
+    int           x,
+    int           y
+)
 {
     SDL_Rect dest;
     dest.x = x;

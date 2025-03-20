@@ -3,7 +3,10 @@
 #include "../texture.h"
 #include <SDL2/SDL_events.h>
 
-void draw_widget_rotary(mftk_window *window, mftk_widget *widget)
+void draw_widget_rotary(
+    mftk_window *window,
+    mftk_widget *widget
+)
 {
     blit(
         window->renderer,
@@ -35,8 +38,13 @@ void do_mouse_wheel()
 
 }
 
-void do_input_rotary(mftk_window *window, mftk_widget *widget,
-    int mouse_x, int mouse_y, SDL_Event *event)
+void do_input_rotary(
+    mftk_window *window,
+    mftk_widget *widget,
+    int          mouse_x,
+    int          mouse_y,
+    SDL_Event   *event
+)
 {
     if (event->type != SDL_MOUSEBUTTONDOWN &&
         event->type != SDL_MOUSEBUTTONUP &&

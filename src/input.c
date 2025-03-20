@@ -2,7 +2,9 @@
 
 #include "widget/toggle.h"
 
-void mftk_do_input(mftk_window *window)
+void mftk_do_input(
+    mftk_window *window
+)
 {
     int mouse_x, mouse_y;
     SDL_GetMouseState(&mouse_x, &mouse_y);

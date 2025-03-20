@@ -2,7 +2,10 @@
 
 #include "../texture.h"
 
-void draw_widget_toggle(mftk_window *window, mftk_widget *widget)
+void draw_widget_toggle(
+    mftk_window *window,
+    mftk_widget *widget
+)
 {
     for (int i = 0; i < widget->data.toggle.count; i++)
     {
@@ -30,8 +33,13 @@ void draw_widget_toggle(mftk_window *window, mftk_widget *widget)
     }
 }
 
-void do_input_toggle(mftk_window *window, mftk_widget *widget,
-    int mouse_x, int mouse_y, SDL_Event *event)
+void do_input_toggle(
+    mftk_window *window,
+    mftk_widget *widget,
+    int          mouse_x,
+    int          mouse_y,
+    SDL_Event   *event
+)
 {
     if (event->type != SDL_MOUSEBUTTONDOWN && event->type != SDL_MOUSEWHEEL)
     {

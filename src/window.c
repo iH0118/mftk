@@ -4,8 +4,12 @@
 #include "util.h"
 #include "widget.h"
 
-mftk_window *mftk_create_window(const char *title, unsigned int size_x,
-    unsigned int size_y, SDL_Color bg)
+mftk_window *mftk_create_window (
+    const char   *title,
+    unsigned int  size_x,
+    unsigned int  size_y,
+    SDL_Color     bg
+)
 {
     mftk_window *window = malloc(sizeof(mftk_window));
 
@@ -30,7 +34,9 @@ mftk_window *mftk_create_window(const char *title, unsigned int size_x,
     return window;
 }
 
-mftk_window *mftk_create_window_json(const char *ui_json)
+mftk_window *mftk_create_window_json(
+    const char *ui_json
+)
 {
     cJSON *root = cJSON_Parse(ui_json);
     cJSON *window_json = cJSON_GetObjectItem(root, "window");
@@ -61,7 +67,9 @@ mftk_window *mftk_create_window_json(const char *ui_json)
     return window;
 }
 
-void mftk_draw_window(mftk_window *window)
+void mftk_draw_window(
+    mftk_window *window
+)
 {
     SDL_SetRenderDrawColor(
         window->renderer,

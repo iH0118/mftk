@@ -2,7 +2,10 @@
 
 #include "../texture.h"
 
-void draw_widget_led_amber(mftk_window *window, mftk_widget *widget)
+void draw_widget_led_amber(
+    mftk_window *window,
+    mftk_widget *widget
+)
 {
     for (int i = 0; i < widget->data.led.count; i++)
     {
@@ -17,7 +20,10 @@ void draw_widget_led_amber(mftk_window *window, mftk_widget *widget)
     }
 }
 
-void draw_widget_led_red(mftk_window *window, mftk_widget *widget)
+void draw_widget_led_red(
+    mftk_window *window,
+    mftk_widget *widget
+)
 {
     for (int i = 0; i < widget->data.led.count; i++)
     {

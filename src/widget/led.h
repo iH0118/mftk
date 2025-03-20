@@ -3,8 +3,14 @@
 
 #include "../common.h"
 
-void draw_widget_led_amber(mftk_window *window, mftk_widget *widget);
+void draw_widget_led_amber(
+    mftk_window *window,
+    mftk_widget *widget
+);
 
-void draw_widget_led_red(mftk_window *window, mftk_widget *widget);
+void draw_widget_led_red(
+    mftk_window *window,
+    mftk_widget *widget
+);
 
 #endif

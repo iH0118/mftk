@@ -3,6 +3,8 @@
 
 #include "common.h"
 
-void mftk_do_input(mftk_window *window);
+void mftk_do_input(
+    mftk_window *window
+);
 
 #endif
