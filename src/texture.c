@@ -5,7 +5,6 @@
 #include "../res/textures_rotary.c"
 #include "../res/textures_text.c"
 #include "../res/textures_toggle.c"
-#include <SDL3/SDL_render.h>
 
 const unsigned char *rotary_dial_png[] = {
     rotary_0_png,

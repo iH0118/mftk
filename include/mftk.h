@@ -1,7 +1,6 @@
 #ifndef INCLUDE_MFTK_H
 #define INCLUDE_MFTK_H
 
-#include <SDL3/SDL.h>
 #include "types.h"
 
 mftk_window *mftk_create_window(

@@ -1,10 +1,6 @@
 #include "rotary.h"
 
 #include "../texture.h"
-#include <SDL3/SDL_events.h>
-//#include <SDL2/SDL_mouse.h>
-//#include <SDL2/SDL_stdinc.h>
-
 void draw_widget_rotary(
     mftk_window *window,
     mftk_widget *widget

@@ -3,7 +3,6 @@
 #include "texture.h"
 #include "util.h"
 #include "widget.h"
-#include <SDL3/SDL_render.h>
 
 mftk_window *mftk_create_window (
     const char   *title,
@@ -13,9 +12,6 @@ mftk_window *mftk_create_window (
 )
 {
     mftk_window *window = malloc(sizeof(mftk_window));
-
-    //unsigned int renderer_flags =
-    //    SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
 
     window->window = SDL_CreateWindow(
         title,

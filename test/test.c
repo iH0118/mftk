@@ -1,8 +1,7 @@
-#include <SDL2/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <SDL3/SDL_main.h>
 #include "../include/mftk.h"
-//#include "mftk_texture.h"
 
 int main(void)
 {
