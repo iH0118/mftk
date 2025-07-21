@@ -1,16 +1,16 @@
 # __mftk__
 
-A UI toolkit inspired by 1960s mainframe control panels, written in C using SDL2
+A UI toolkit inspired by 1960s mainframe control panels, written in C
 
 ## Dependencies: 
-  + SDL2
-  + SDL2_image
+  + SDL3
+  + SDL3_image
   + cJSON
 
 ## Make targets
   + __build__
-    + default target
     + builds the library
+    + default target
   + __test__
     + builds the test program
   + __test_run__
@@ -27,6 +27,6 @@ A UI toolkit inspired by 1960s mainframe control panels, written in C using SDL2
     + implement named callbacks
   + add pushbutton widget
     + draw pushbutton textures
-  + add rotary switch widget
+  + add rotary switch widget (semi-implemented)
   + add text input widget (maybe)
   + implement error messages (maybe)
