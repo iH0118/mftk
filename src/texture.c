@@ -5,6 +5,7 @@
 #include "../res/textures_rotary.c"
 #include "../res/textures_text.c"
 #include "../res/textures_toggle.c"
+#include <SDL3/SDL_render.h>
 
 const unsigned char *rotary_dial_png[] = {
     rotary_0_png,
@@ -246,110 +247,110 @@ void mftk_init_textures(
     mftk_window *window
 )
 {
-    window->texture_set.container.screw = IMG_LoadTextureTyped_RW(
+    window->texture_set.container.screw = IMG_LoadTextureTyped_IO(
         window->renderer,
-        SDL_RWFromConstMem(screw_png, screw_png_len),
+        SDL_IOFromConstMem(screw_png, screw_png_len),
         1,
         filetype
     );
 
-    window->texture_set.toggle.base = IMG_LoadTextureTyped_RW(
+    window->texture_set.toggle.base = IMG_LoadTextureTyped_IO(
         window->renderer,
-        SDL_RWFromConstMem(toggle_base_png, toggle_base_png_len),
+        SDL_IOFromConstMem(toggle_base_png, toggle_base_png_len),
         1,
         filetype
     );
 
-    window->texture_set.toggle.up = IMG_LoadTextureTyped_RW(
+    window->texture_set.toggle.up = IMG_LoadTextureTyped_IO(
         window->renderer,
-        SDL_RWFromConstMem(toggle_up_png, toggle_up_png_len),
+        SDL_IOFromConstMem(toggle_up_png, toggle_up_png_len),
         1,
         filetype
     );
 
-    window->texture_set.toggle.center = IMG_LoadTextureTyped_RW(
+    window->texture_set.toggle.center = IMG_LoadTextureTyped_IO(
         window->renderer,
-        SDL_RWFromConstMem(toggle_center_png, toggle_center_png_len),
+        SDL_IOFromConstMem(toggle_center_png, toggle_center_png_len),
         1, filetype
     );
 
-    window->texture_set.toggle.down = IMG_LoadTextureTyped_RW(
+    window->texture_set.toggle.down = IMG_LoadTextureTyped_IO(
         window->renderer,
-        SDL_RWFromConstMem(toggle_down_png, toggle_down_png_len),
+        SDL_IOFromConstMem(toggle_down_png, toggle_down_png_len),
         1,
         filetype
     );
 
-    window->texture_set.led_red.on = IMG_LoadTextureTyped_RW(
+    window->texture_set.led_red.on = IMG_LoadTextureTyped_IO(
         window->renderer,
-        SDL_RWFromConstMem(led_red_on_png, led_red_on_png_len),
+        SDL_IOFromConstMem(led_red_on_png, led_red_on_png_len),
         1,
         filetype
     );
 
-    window->texture_set.led_red.off = IMG_LoadTextureTyped_RW(
+    window->texture_set.led_red.off = IMG_LoadTextureTyped_IO(
         window->renderer,
-        SDL_RWFromConstMem(led_red_off_png, led_red_off_png_len),
+        SDL_IOFromConstMem(led_red_off_png, led_red_off_png_len),
         1,
         filetype
     );
 
-    window->texture_set.led_amber.on = IMG_LoadTextureTyped_RW(
+    window->texture_set.led_amber.on = IMG_LoadTextureTyped_IO(
         window->renderer,
-        SDL_RWFromConstMem(led_amber_on_png, led_amber_on_png_len),
+        SDL_IOFromConstMem(led_amber_on_png, led_amber_on_png_len),
         1,
         filetype
     );
 
-    window->texture_set.led_amber.off = IMG_LoadTextureTyped_RW(
+    window->texture_set.led_amber.off = IMG_LoadTextureTyped_IO(
         window->renderer,
-        SDL_RWFromConstMem(led_amber_off_png, led_amber_off_png_len),
+        SDL_IOFromConstMem(led_amber_off_png, led_amber_off_png_len),
         1,
         filetype
     );
 
-    window->texture_set.led_small_red.on = IMG_LoadTextureTyped_RW(
+    window->texture_set.led_small_red.on = IMG_LoadTextureTyped_IO(
         window->renderer,
-        SDL_RWFromConstMem(led_small_red_on_png, led_small_red_on_png_len),
+        SDL_IOFromConstMem(led_small_red_on_png, led_small_red_on_png_len),
         1,
         filetype
     );
 
-    window->texture_set.led_small_red.off = IMG_LoadTextureTyped_RW(
+    window->texture_set.led_small_red.off = IMG_LoadTextureTyped_IO(
         window->renderer,
-        SDL_RWFromConstMem(led_small_red_off_png, led_small_red_off_png_len),
+        SDL_IOFromConstMem(led_small_red_off_png, led_small_red_off_png_len),
         1,
         filetype
     );
 
-    window->texture_set.led_small_amber.on = IMG_LoadTextureTyped_RW(
+    window->texture_set.led_small_amber.on = IMG_LoadTextureTyped_IO(
         window->renderer,
-        SDL_RWFromConstMem(led_small_amber_on_png, led_small_amber_on_png_len),
+        SDL_IOFromConstMem(led_small_amber_on_png, led_small_amber_on_png_len),
         1,
         filetype
     );
 
-    window->texture_set.led_small_amber.off = IMG_LoadTextureTyped_RW(
+    window->texture_set.led_small_amber.off = IMG_LoadTextureTyped_IO(
         window->renderer,
-        SDL_RWFromConstMem(
+        SDL_IOFromConstMem(
             led_small_amber_off_png, led_small_amber_off_png_len
         ),
         1,
         filetype
         );
 
-    window->texture_set.rotary.base = IMG_LoadTextureTyped_RW(
+    window->texture_set.rotary.base = IMG_LoadTextureTyped_IO(
         window->renderer,
-        SDL_RWFromConstMem(rotary_base_png, rotary_base_png_len),
+        SDL_IOFromConstMem(rotary_base_png, rotary_base_png_len),
         1,
         filetype
     );
 
     for (int i = 0; i < 16; i++)
     {
-        window->texture_set.rotary.dial[i] = IMG_LoadTextureTyped_RW(
+        window->texture_set.rotary.dial[i] = IMG_LoadTextureTyped_IO(
             window->renderer,
-            SDL_RWFromConstMem(rotary_dial_png[i], rotary_dial_png_len[i]),
+            SDL_IOFromConstMem(rotary_dial_png[i], rotary_dial_png_len[i]),
             1,
             filetype
         );
@@ -357,9 +358,9 @@ void mftk_init_textures(
 
     for (int i = 0; i < 95; i++)
     {
-        window->texture_set.letter[i] = IMG_LoadTextureTyped_RW(
+        window->texture_set.letter[i] = IMG_LoadTextureTyped_IO(
             window->renderer,
-            SDL_RWFromConstMem(text_png[i], text_png_len[i]),
+            SDL_IOFromConstMem(text_png[i], text_png_len[i]),
             1,
             filetype
         );
@@ -373,9 +374,12 @@ void blit(
     int           y
 )
 {
-    SDL_Rect dest;
+    SDL_FRect dest;
     dest.x = x;
     dest.y = y;
-    SDL_QueryTexture(texture, NULL, NULL, &dest.w, &dest.h);
-    SDL_RenderCopy(renderer, texture, NULL, &dest);
+    //SDL_PropertiesID props = SDL_GetTextureProperties(texture);
+    //dest.w = SDL_GetNumberProperty(props, SDL_PROP_TEXTURE_WIDTH_NUMBER, 0);
+    //dest.h = SDL_GetNumberProperty(props, SDL_PROP_TEXTURE_HEIGHT_NUMBER, 0);
+    SDL_GetTextureSize(texture, &(dest.w), &(dest.h));
+    SDL_RenderTexture(renderer, texture, NULL, &dest);
 }

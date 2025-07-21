@@ -3,6 +3,7 @@
 #include <string.h>
 #include "util.h"
 #include "widget/container.h"
+#include "widget/rotary.h"
 #include "widget/toggle.h"
 #include "widget/led.h"
 #include "widget/text.h"
@@ -110,7 +111,7 @@ void mftk_draw_widget(
         break;
 
         case MFTK_ROTARY:
-        //TODO
+        draw_widget_rotary(window, widget);
         break;
 
         case MFTK_TEXT:

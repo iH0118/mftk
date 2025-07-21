@@ -41,7 +41,8 @@ void do_input_toggle(
     SDL_Event   *event
 )
 {
-    if (event->type != SDL_MOUSEBUTTONDOWN && event->type != SDL_MOUSEWHEEL)
+    if (event->type != SDL_EVENT_MOUSE_BUTTON_DOWN && 
+        event->type != SDL_EVENT_MOUSE_WHEEL)
     {
         return;
     }
@@ -55,7 +56,7 @@ void do_input_toggle(
         {
             long state_prev = widget->data.toggle.state;
 
-            if (event->type == SDL_MOUSEBUTTONDOWN)
+            if (event->type == SDL_EVENT_MOUSE_BUTTON_DOWN)
             {
                 switch (event->button.button)
                 {
@@ -72,7 +73,7 @@ void do_input_toggle(
                 }
             }
 
-            else if (event->type == SDL_MOUSEWHEEL)
+            else if (event->type == SDL_EVENT_MOUSE_WHEEL)
             {
                 /* scroll up: increase switch row value*/
                 if (event->wheel.y > 0)

@@ -16,10 +16,10 @@ void draw_widget_container(
     int y_top    = widget->y * MFTK_UNIT;
     int y_bottom = y_top + size_y_u + 1;
 
-    SDL_Rect rect1 = {x_left + 1, y_top + 2, size_x_u - 1, size_y_u - 2};
-    SDL_Rect rect2 = {x_left + 2, y_top + 1, size_x_u - 2, size_y_u - 1};
+    SDL_FRect rect1 = {x_left + 1, y_top + 2, size_x_u - 1, size_y_u - 2};
+    SDL_FRect rect2 = {x_left + 2, y_top + 1, size_x_u - 2, size_y_u - 1};
 
-    SDL_Point points[] = {
+    SDL_FPoint points[] = {
         {x_left  + 5, y_top       },
         {x_right - 5, y_top       },
         {x_right - 2, y_top    + 1},
@@ -50,10 +50,10 @@ void draw_widget_container(
     SDL_RenderFillRect(window->renderer, &rect2);
 
     SDL_SetRenderDrawColor(window->renderer, 0, 0, 0, 255);
-    SDL_RenderDrawLines(
+    SDL_RenderLines(
         window->renderer,
         points,
-        sizeof(points) / sizeof(SDL_Point)
+        sizeof(points) / sizeof(SDL_FPoint)
     );
 
     blit(window->renderer, screw, x_left + 3, y_top + 3);

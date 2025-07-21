@@ -1,12 +1,13 @@
 #include "input.h"
 
+#include "widget/rotary.h"
 #include "widget/toggle.h"
 
 void mftk_do_input(
     mftk_window *window
 )
 {
-    int mouse_x, mouse_y;
+    float mouse_x, mouse_y;
     SDL_GetMouseState(&mouse_x, &mouse_y);
 
     SDL_Event event;
@@ -14,7 +15,7 @@ void mftk_do_input(
 
     while (SDL_PollEvent(&event))
     {
-        if (event.type == SDL_QUIT) exit(0);
+        if (event.type == SDL_EVENT_QUIT) exit(0);
 
         for (node = window->widget_top; node; node = node->next)
         {
@@ -29,7 +30,7 @@ void mftk_do_input(
                 break;
 
                 case MFTK_ROTARY:
-                //TODO
+                do_input_rotary(window, node, mouse_x, mouse_y, &event);
                 break;
 
                 default:

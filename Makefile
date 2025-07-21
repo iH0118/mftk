@@ -1,14 +1,18 @@
-CC:=gcc
-CFLAGS:=-O -Wall -Wextra
+CC      :=gcc
+CFLAGS  :=-O -Wall -Wextra
+#LDFLAGS :=
 
-OUTPUT:=build/mftk.a
-SRCS:=$(shell find src -name '*.c')
-OBJS:=$(patsubst src/%.c,build/%.o,$(SRCS))
+CFLAGS  += $(shell pkg-config sdl3 sdl3-image libcjson --cflags)
+LDFLAGS += $(shell pkg-config sdl3 sdl3-image libcjson --libs)
+
+OUTPUT := build/mftk.a
+SRCS   := $(shell find src -name '*.c')
+OBJS   := $(patsubst src/%.c,build/%.o,$(SRCS))
 
 build: $(OUTPUT)
 
 test/a.out: test/test.c $(OUTPUT)
-	$(CC) $(CFLAGS) -g $^ -o $@ -lSDL2 -lSDL2_image -lcjson
+	$(CC) $(CFLAGS) -g $^ -o $@ $(LDFLAGS)
 
 test: test/a.out
 

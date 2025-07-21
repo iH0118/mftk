@@ -1,19 +1,19 @@
 #ifndef INCLUDE_MFTK_TYPES_H
 #define INCLUDE_MFTK_TYPES_H
 
-#include <SDL2/SDL.h>
+#include <SDL3/SDL.h>
 
-typedef struct mftk_window mftk_window;
-typedef struct mftk_widget mftk_widget;
-typedef union mftk_widget_data mftk_widget_data;
-typedef struct mftk_widget_data_container mftk_widget_data_container;
-typedef struct mftk_widget_data_toggle mftk_widget_data_toggle;
+typedef struct mftk_window                 mftk_window;
+typedef struct mftk_widget                 mftk_widget;
+typedef union  mftk_widget_data            mftk_widget_data;
+typedef struct mftk_widget_data_container  mftk_widget_data_container;
+typedef struct mftk_widget_data_toggle     mftk_widget_data_toggle;
 typedef struct mftk_widget_data_toggle_mom mftk_widget_data_toggle_mom;
-typedef struct mftk_widget_data_led mftk_widget_data_led;
-typedef struct mftk_widget_data_rotary mftk_widget_data_rotary;
-typedef struct mftk_widget_data_text mftk_widget_data_text;
+typedef struct mftk_widget_data_led        mftk_widget_data_led;
+typedef struct mftk_widget_data_rotary     mftk_widget_data_rotary;
+typedef struct mftk_widget_data_text       mftk_widget_data_text;
 typedef struct mftk_widget_data_text_count mftk_widget_data_text_count;
-typedef struct mftk_texture_set mftk_texture_set;
+typedef struct mftk_texture_set            mftk_texture_set;
 //typedef struct mftk_widget_data_text_input mftk_widget_data_text_input;
 
 struct mftk_texture_set {
@@ -92,7 +92,7 @@ struct mftk_widget_data_led {
 struct mftk_widget_data_rotary {
     //void (*trigger_up)(void *data);
     //void (*trigger_down)(void *data);
-    char state;
+    unsigned char state;
 };
 
 struct mftk_widget_data_text {
@@ -134,6 +134,8 @@ struct mftk_window {
     mftk_texture_set  texture_set;
     SDL_Color         color_bg;
     unsigned int      trans_counter;
+    //int               stored_mouse_x;
+    //int               stored_mouse_y;
 };
 
 #endif

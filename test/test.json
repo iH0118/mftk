@@ -1,7 +1,7 @@
 {
     "window" : {
         "title" : "test",
-        "width" : 23,
+        "width" : 34,
         "height" : 20,
         "color_bg" : [22, 31, 60, 255]
     },
@@ -196,6 +196,54 @@
             "data" : {
                 "count" : 1
             }
+        },
+        {
+            "type" : "MFTK_CONTAINER",
+            "label" : "container_rotary",
+            "x" : 23,
+            "y" : 3,
+            "data" : {
+                "size_x" : 10,
+                "size_y" : 14,
+                "color" : [29, 43, 80, 255]
+            }
+        },
+        {
+            "type" : "MFTK_TEXT",
+            "label" : "label_leds_rotary",
+            "x" : 24,
+            "y" : 4,
+            "data" : {
+                "text" : "ROTARY",
+                "width" : 8,
+                "line" : true
+            }
+        },
+        {
+            "type" : "MFTK_TEXT_COUNT",
+            "label" : "label_leds_rotary_bits",
+            "x" : 24,
+            "y" : 5,
+            "data" : {
+                "start" : 3,
+                "count" : 4,
+                "step" : -1
+            }
+        },
+        {
+            "type" : "MFTK_LED_AMBER",
+            "label" : "leds_rotary",
+            "x" : 24,
+            "y" : 6,
+            "data" : {
+                "count" : 4
+            }
+        },
+        {
+            "type" : "MFTK_ROTARY",
+            "label" : "rotary_test",
+            "x" : 24,
+            "y" : 8
         }
     ]
 }

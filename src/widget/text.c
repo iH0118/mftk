@@ -3,7 +3,6 @@
 #include <string.h>
 #include "../texture.h"
 #include "../util.h"
-#include <SDL2/SDL_render.h>
 
 void draw_widget_text(
     mftk_window *window,
@@ -32,7 +31,7 @@ void draw_widget_text(
     if (widget->data.text.line)
     {
         int y_top = widget->y * MFTK_UNIT + 5;
-        int y_bot = y_top + 4;
+        int y_bot = y_top + 4;  
         int x_start1 = widget->x * MFTK_UNIT + 2;
         int x_end1 = start_x - 4;
         int x_start2 = start_x + 2 + 6 * text_len;
@@ -40,10 +39,10 @@ void draw_widget_text(
             (widget->x + widget->data.text.width) * MFTK_UNIT - 2;
 
         SDL_SetRenderDrawColor(window->renderer, 255, 255, 255, 255);
-        SDL_RenderDrawLine(window->renderer, x_start1, y_bot, x_start1, y_top);
-        SDL_RenderDrawLine(window->renderer, x_start1, y_top, x_end1,   y_top);
-        SDL_RenderDrawLine(window->renderer, x_start2, y_top, x_end2,   y_top);
-        SDL_RenderDrawLine(window->renderer, x_end2,   y_top, x_end2,   y_bot);
+        SDL_RenderLine(window->renderer, x_start1, y_bot, x_start1, y_top);
+        SDL_RenderLine(window->renderer, x_start1, y_top, x_end1,   y_top);
+        SDL_RenderLine(window->renderer, x_start2, y_top, x_end2,   y_top);
+        SDL_RenderLine(window->renderer, x_end2,   y_top, x_end2,   y_bot);
     }
 }
 

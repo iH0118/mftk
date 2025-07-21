@@ -1,7 +1,9 @@
 #include "rotary.h"
 
 #include "../texture.h"
-#include <SDL2/SDL_events.h>
+#include <SDL3/SDL_events.h>
+//#include <SDL2/SDL_mouse.h>
+//#include <SDL2/SDL_stdinc.h>
 
 void draw_widget_rotary(
     mftk_window *window,
@@ -23,19 +25,61 @@ void draw_widget_rotary(
     );
 }
 
-void do_mouse_button_down()
+void do_mouse_button_down(
+    mftk_window *window,
+    mftk_widget *widget,
+    int          mouse_x,
+    int          mouse_y,
+    SDL_Event   *event
+)
 {
-    
+    switch (event->button.button)
+    {
+        /* left click */
+        case 1:
+        //TODO
+        //window->stored_mouse_x = mouse_x;
+        //window->stored_mouse_y = mouse_y;
+        //SDL_SetRelativeMouseMode(SDL_TRUE);
+        break;
+
+        /* middle click: reset state to 0*/
+        case 2:
+        widget->data.rotary.state = 0;
+        break;
+    }
 }
 
-void do_mouse_button_up()
+void do_mouse_button_up(
+    mftk_window *window,
+    mftk_widget *widget,
+    SDL_Event   *event
+)
 {
+    if (event->button.button != 1) return;
 
+    //SDL_SetRelativeMouseMode(SDL_FALSE);
+    //SDL_WarpMouseInWindow(
+    //    window->window,
+    //    window->stored_mouse_x,
+    //    window->stored_mouse_y
+    //);
 }
 
-void do_mouse_wheel()
+void do_mouse_wheel(
+    mftk_widget *widget,
+    SDL_Event   *event
+)
 {
+    if (event->wheel.y > 0)
+    {
+        widget->data.rotary.state = (widget->data.rotary.state + 1) % 16;
+    }
 
+    else if (event->wheel.y < 0)
+    {
+        widget->data.rotary.state = (widget->data.rotary.state + 15) % 16;
+    }
 }
 
 void do_input_rotary(
@@ -46,9 +90,9 @@ void do_input_rotary(
     SDL_Event   *event
 )
 {
-    if (event->type != SDL_MOUSEBUTTONDOWN &&
-        event->type != SDL_MOUSEBUTTONUP &&
-        event->type != SDL_MOUSEWHEEL)
+    if (event->type != SDL_EVENT_MOUSE_BUTTON_DOWN &&
+        event->type != SDL_EVENT_MOUSE_BUTTON_UP &&
+        event->type != SDL_EVENT_MOUSE_WHEEL)
     {
         return;
     }
@@ -60,16 +104,16 @@ void do_input_rotary(
     {
         switch (event->type)
         {
-            case SDL_MOUSEBUTTONDOWN:
-            do_mouse_button_down();
+            case SDL_EVENT_MOUSE_BUTTON_DOWN:
+            do_mouse_button_down(window, widget, mouse_x, mouse_y, event);
             break;
 
-            case SDL_MOUSEBUTTONUP:
-            do_mouse_button_up();
+            case SDL_EVENT_MOUSE_BUTTON_UP:
+            do_mouse_button_up(window, widget, event);
             break;
 
-            case SDL_MOUSEWHEEL:
-            do_mouse_wheel();
+            case SDL_EVENT_MOUSE_WHEEL:
+            do_mouse_wheel(widget, event);
             break;
         }
     }

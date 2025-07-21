@@ -30,6 +30,9 @@ int main(void)
     mftk_widget *led_add = mftk_get_widget(window, "led_add");
     mftk_widget *led_sub = mftk_get_widget(window, "led_sub");
 
+    mftk_widget *leds_rotary = mftk_get_widget(window, "leds_rotary");
+    mftk_widget *rotary_test = mftk_get_widget(window, "rotary_test");
+
     sw_add_sub->data.toggle.state = 1;
 
     while (1)
@@ -48,6 +51,8 @@ int main(void)
 
         leds_result->data.led.state = result;
         led_carry->data.led.state = result >> 8;
+
+        leds_rotary->data.led.state = rotary_test->data.rotary.state;
 
         mftk_draw_window(window);
         SDL_RenderPresent(window->renderer);

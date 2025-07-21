@@ -3,8 +3,8 @@
 
 #include <cjson/cJSON.h>
 #include <stdlib.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL.h>
+#include <SDL3_image/SDL_image.h>
+#include <SDL3/SDL.h>
 #include "../include/types.h"
 
 #define MFTK_UNIT 11
