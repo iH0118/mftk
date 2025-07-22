@@ -1,6 +1,7 @@
 #include "rotary.h"
 
 #include "../texture.h"
+
 void draw_widget_rotary(
     mftk_window *window,
     mftk_widget *widget
@@ -34,12 +35,13 @@ void do_mouse_button_down(
         /* left click */
         case 1:
         //TODO
-        //window->stored_mouse_x = mouse_x;
-        //window->stored_mouse_y = mouse_y;
-        //SDL_SetRelativeMouseMode(SDL_TRUE);
+        window->mouse_grabbed = true;
+        SDL_SetWindowRelativeMouseMode(window->window, true);
+        SDL_Rect constraint = {mouse_x, mouse_y, 1, 1};
+        SDL_SetWindowMouseRect(window->window, &constraint);
         break;
 
-        /* middle click: reset state to 0*/
+        /* middle click: reset state to 0 */
         case 2:
         widget->data.rotary.state = 0;
         break;
@@ -52,14 +54,16 @@ void do_mouse_button_up(
     SDL_Event   *event
 )
 {
-    if (event->button.button != 1) return;
-
-    //SDL_SetRelativeMouseMode(SDL_FALSE);
-    //SDL_WarpMouseInWindow(
-    //    window->window,
-    //    window->stored_mouse_x,
-    //    window->stored_mouse_y
-    //);
+    switch (event->button.button)
+    {
+        /* left click */
+        case 1:
+        window->mouse_grabbed = false;
+        SDL_SetWindowRelativeMouseMode(window->window, false);
+        SDL_SetWindowMouseRect(window->window, NULL);
+        window->mouse_offset = 0.0F;
+        break;
+    }
 }
 
 void do_mouse_wheel(
@@ -78,6 +82,29 @@ void do_mouse_wheel(
     }
 }
 
+void do_mouse_motion(
+    mftk_window *window,
+    mftk_widget *widget,
+    SDL_Event   *event
+)
+{
+    if (window->mouse_grabbed)
+    {
+        window->mouse_offset += event->motion.yrel;
+
+        if (window->mouse_offset <= -MFTK_MOUSE_THRESHOLD)
+        {
+            window->mouse_offset += MFTK_MOUSE_THRESHOLD;
+            widget->data.rotary.state = (widget->data.rotary.state + 1) % 16;
+        }
+        else if (window->mouse_offset >= MFTK_MOUSE_THRESHOLD)
+        {
+            window->mouse_offset -= MFTK_MOUSE_THRESHOLD;
+            widget->data.rotary.state = (widget->data.rotary.state + 15) % 16;
+        }
+    }
+}
+
 void do_input_rotary(
     mftk_window *window,
     mftk_widget *widget,
@@ -86,13 +113,6 @@ void do_input_rotary(
     SDL_Event   *event
 )
 {
-    if (event->type != SDL_EVENT_MOUSE_BUTTON_DOWN &&
-        event->type != SDL_EVENT_MOUSE_BUTTON_UP &&
-        event->type != SDL_EVENT_MOUSE_WHEEL)
-    {
-        return;
-    }
-
     int dx = mouse_x - (widget->x + 4) * MFTK_UNIT;
     int dy = mouse_y - (widget->y + 4) * MFTK_UNIT;
 
@@ -110,6 +130,10 @@ void do_input_rotary(
 
             case SDL_EVENT_MOUSE_WHEEL:
             do_mouse_wheel(widget, event);
+            break;
+
+            case SDL_EVENT_MOUSE_MOTION:
+            do_mouse_motion(window, widget, event);
             break;
         }
     }

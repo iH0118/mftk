@@ -95,7 +95,7 @@ void do_input_toggle(
             widget->data.toggle.trans_state =
                 widget->data.toggle.state ^ state_prev;
 
-            window->trans_counter = TRANSITION_TIME;
+            window->trans_counter = MFTK_TRANSITION_TIME;
         }
     }
 }

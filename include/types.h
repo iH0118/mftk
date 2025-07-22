@@ -98,7 +98,7 @@ struct mftk_widget_data_rotary {
 struct mftk_widget_data_text {
     char         *text;
     unsigned int  width;
-    char          line : 1;
+    bool          line;
 };
 
 struct mftk_widget_data_text_count {
@@ -134,8 +134,8 @@ struct mftk_window {
     mftk_texture_set  texture_set;
     SDL_Color         color_bg;
     unsigned int      trans_counter;
-    //int               stored_mouse_x;
-    //int               stored_mouse_y;
+    bool              mouse_grabbed;
+    float             mouse_offset;
 };
 
 #endif

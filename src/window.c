@@ -24,6 +24,8 @@ mftk_window *mftk_create_window (
     SDL_SetRenderVSync(window->renderer, 1);
     window->widget_top = NULL;
     window->color_bg = bg;
+    window->mouse_grabbed = false;
+    window->mouse_offset = 0.0F;
 
     mftk_init_textures(window);
 
