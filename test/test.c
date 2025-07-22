@@ -3,31 +3,35 @@
 #include <SDL3/SDL_main.h>
 #include "../include/mftk.h"
 
+char *read_file(const char *filename)
+{
+    FILE *fileptr = fopen(filename, "r");
+    fseek(fileptr, 0L, SEEK_END);
+    int filesize = ftell(fileptr);
+    rewind(fileptr);
+    char *buffer = malloc(filesize);
+    fread(buffer, sizeof(char), filesize, fileptr);
+    fclose(fileptr);
+    return buffer;
+}
+
 int main(void)
 {
-    FILE *stream_ui_json = fopen("test.json", "r");
-    fseek(stream_ui_json, 0L, SEEK_END);
-    int filesize = ftell(stream_ui_json);
-    rewind(stream_ui_json);
-    char *ui_json = malloc(filesize);
-    fread(ui_json, sizeof(char), filesize, stream_ui_json);
-    fclose(stream_ui_json);
-
     SDL_Init(SDL_INIT_VIDEO);
 
+    char *ui_json = read_file("test.json");
     mftk_window *window = mftk_create_window_json(ui_json);
-
     free(ui_json);
 
-    mftk_widget *sw_op_a = mftk_get_widget(window, "switches_op_a");
-    mftk_widget *sw_op_b = mftk_get_widget(window, "switches_op_b");
-    mftk_widget *sw_add_sub = mftk_get_widget(window, "switch_add_sub");
-    mftk_widget *led_carry = mftk_get_widget(window, "led_carry");
+    mftk_widget *sw_op_a     = mftk_get_widget(window, "switches_op_a");
+    mftk_widget *sw_op_b     = mftk_get_widget(window, "switches_op_b");
+    mftk_widget *sw_add_sub  = mftk_get_widget(window, "switch_add_sub");
+    mftk_widget *led_carry   = mftk_get_widget(window, "led_carry");
     mftk_widget *leds_result = mftk_get_widget(window, "leds_result");
-    mftk_widget *leds_op_a = mftk_get_widget(window, "leds_op_a");
-    mftk_widget *leds_op_b = mftk_get_widget(window, "leds_op_b");
-    mftk_widget *led_add = mftk_get_widget(window, "led_add");
-    mftk_widget *led_sub = mftk_get_widget(window, "led_sub");
+    mftk_widget *leds_op_a   = mftk_get_widget(window, "leds_op_a");
+    mftk_widget *leds_op_b   = mftk_get_widget(window, "leds_op_b");
+    mftk_widget *led_add     = mftk_get_widget(window, "led_add");
+    mftk_widget *led_sub     = mftk_get_widget(window, "led_sub");
 
     mftk_widget *leds_rotary = mftk_get_widget(window, "leds_rotary");
     mftk_widget *rotary_test = mftk_get_widget(window, "rotary_test");
