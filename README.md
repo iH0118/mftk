@@ -27,6 +27,5 @@ A UI toolkit inspired by 1960s mainframe control panels, written in C
     + implement named callbacks
   + add pushbutton widget
     + draw pushbutton textures
-  + add rotary switch widget (semi-implemented)
   + add text input widget (maybe)
   + implement error messages (maybe)
