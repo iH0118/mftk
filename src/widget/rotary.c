@@ -97,6 +97,7 @@ void do_mouse_motion(
             window->mouse_offset += MFTK_MOUSE_THRESHOLD;
             widget->data.rotary.state = (widget->data.rotary.state + 1) % 16;
         }
+
         else if (window->mouse_offset >= MFTK_MOUSE_THRESHOLD)
         {
             window->mouse_offset -= MFTK_MOUSE_THRESHOLD;
