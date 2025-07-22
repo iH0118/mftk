@@ -25,7 +25,7 @@ clean:
 	rm -f test/a.out
 
 clean_all: clean
-	rm -f build/mftk.a
+	rm -f $(OUTPUT)
 
 src/%.c:: src/%.h src/mftk_common.h
 
