@@ -29,7 +29,7 @@ clean_all: clean
 
 src/%.c:: src/%.h src/mftk_common.h
 
-src/mftk_texture.c: $(wildcard textures/*)
+src/texture.c: $(wildcard textures/*)
 	util/make_textures.sh
 
 build/%.o: src/%.c
