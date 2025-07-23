@@ -27,7 +27,7 @@ clean:
 clean_all: clean
 	rm -f $(OUTPUT)
 
-src/%.c:: src/%.h src/mftk_common.h
+src/%.c:: src/%.h src/common.h
 
 src/texture.c: $(wildcard textures/*)
 	util/make_textures.sh
