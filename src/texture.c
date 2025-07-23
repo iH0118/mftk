@@ -249,21 +249,21 @@ void mftk_init_textures(
     window->texture_set.container.screw = IMG_LoadTextureTyped_IO(
         window->renderer,
         SDL_IOFromConstMem(screw_png, screw_png_len),
-        1,
+        true,
         filetype
     );
 
     window->texture_set.toggle.base = IMG_LoadTextureTyped_IO(
         window->renderer,
         SDL_IOFromConstMem(toggle_base_png, toggle_base_png_len),
-        1,
+        true,
         filetype
     );
 
     window->texture_set.toggle.up = IMG_LoadTextureTyped_IO(
         window->renderer,
         SDL_IOFromConstMem(toggle_up_png, toggle_up_png_len),
-        1,
+        true,
         filetype
     );
 
@@ -276,56 +276,56 @@ void mftk_init_textures(
     window->texture_set.toggle.down = IMG_LoadTextureTyped_IO(
         window->renderer,
         SDL_IOFromConstMem(toggle_down_png, toggle_down_png_len),
-        1,
+        true,
         filetype
     );
 
     window->texture_set.led_red.on = IMG_LoadTextureTyped_IO(
         window->renderer,
         SDL_IOFromConstMem(led_red_on_png, led_red_on_png_len),
-        1,
+        true,
         filetype
     );
 
     window->texture_set.led_red.off = IMG_LoadTextureTyped_IO(
         window->renderer,
         SDL_IOFromConstMem(led_red_off_png, led_red_off_png_len),
-        1,
+        true,
         filetype
     );
 
     window->texture_set.led_amber.on = IMG_LoadTextureTyped_IO(
         window->renderer,
         SDL_IOFromConstMem(led_amber_on_png, led_amber_on_png_len),
-        1,
+        true,
         filetype
     );
 
     window->texture_set.led_amber.off = IMG_LoadTextureTyped_IO(
         window->renderer,
         SDL_IOFromConstMem(led_amber_off_png, led_amber_off_png_len),
-        1,
+        true,
         filetype
     );
 
     window->texture_set.led_small_red.on = IMG_LoadTextureTyped_IO(
         window->renderer,
         SDL_IOFromConstMem(led_small_red_on_png, led_small_red_on_png_len),
-        1,
+        true,
         filetype
     );
 
     window->texture_set.led_small_red.off = IMG_LoadTextureTyped_IO(
         window->renderer,
         SDL_IOFromConstMem(led_small_red_off_png, led_small_red_off_png_len),
-        1,
+        true,
         filetype
     );
 
     window->texture_set.led_small_amber.on = IMG_LoadTextureTyped_IO(
         window->renderer,
         SDL_IOFromConstMem(led_small_amber_on_png, led_small_amber_on_png_len),
-        1,
+        true,
         filetype
     );
 
@@ -334,14 +334,14 @@ void mftk_init_textures(
         SDL_IOFromConstMem(
             led_small_amber_off_png, led_small_amber_off_png_len
         ),
-        1,
+        true,
         filetype
         );
 
     window->texture_set.rotary.base = IMG_LoadTextureTyped_IO(
         window->renderer,
         SDL_IOFromConstMem(rotary_base_png, rotary_base_png_len),
-        1,
+        true,
         filetype
     );
 
@@ -373,12 +373,7 @@ void blit(
     int           y
 )
 {
-    SDL_FRect dest;
-    dest.x = x;
-    dest.y = y;
-    //SDL_PropertiesID props = SDL_GetTextureProperties(texture);
-    //dest.w = SDL_GetNumberProperty(props, SDL_PROP_TEXTURE_WIDTH_NUMBER, 0);
-    //dest.h = SDL_GetNumberProperty(props, SDL_PROP_TEXTURE_HEIGHT_NUMBER, 0);
+    SDL_FRect dest = {x, y, 0, 0};
     SDL_GetTextureSize(texture, &(dest.w), &(dest.h));
     SDL_RenderTexture(renderer, texture, NULL, &dest);
 }
