@@ -35,8 +35,7 @@ void draw_widget_text(
         int x_start1 = widget->x * MFTK_UNIT + 2;
         int x_end1 = start_x - 4;
         int x_start2 = start_x + 2 + 6 * text_len;
-        int x_end2 =
-            (widget->x + widget->data.text.width) * MFTK_UNIT - 2;
+        int x_end2 = (widget->x + widget->data.text.width) * MFTK_UNIT - 2;
 
         SDL_SetRenderDrawColor(window->renderer, 255, 255, 255, 255);
         SDL_RenderLine(window->renderer, x_start1, y_bot, x_start1, y_top);
