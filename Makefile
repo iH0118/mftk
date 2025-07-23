@@ -29,7 +29,7 @@ clean_all: clean
 
 src/%.c:: src/%.h src/common.h
 
-src/texture.c: $(wildcard textures/*)
+src/texture.c: $(wildcard res/*)
 	util/make_textures.sh
 
 src/common.h: include/types.h
