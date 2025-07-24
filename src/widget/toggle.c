@@ -1,6 +1,7 @@
 #include "toggle.h"
 
 #include "../texture.h"
+#include <SDL3/SDL_events.h>
 
 void draw_widget_toggle(
     mftk_window *window,
@@ -33,6 +34,47 @@ void draw_widget_toggle(
     }
 }
 
+void toggle_do_mouse_button_down(
+    mftk_widget *widget,
+    SDL_Event   *event,
+    int          i
+)
+{
+    switch (event->button.button)
+    {
+        /* left click: toggle individual switch on*/
+        case 1:
+        widget->data.toggle.state ^= 1 << (widget->data.toggle.count - i - 1);
+        break;
+
+        /* middle click: reset row of switches to 0 */
+        case 2:
+        widget->data.toggle.state = 0;
+        break;
+    }
+}
+
+void toggle_do_mouse_wheel(
+    mftk_widget *widget,
+    SDL_Event   *event,
+    int          i
+)
+{
+    /* scroll up: increase switch row value*/
+    if (event->wheel.y > 0)
+    {
+        widget->data.toggle.state =
+            (widget->data.toggle.state + 1) % (1 << widget->data.toggle.count);
+    }
+
+    /* scroll down: decrease switch row value*/
+    else if (event->wheel.y < 0)
+    {
+        widget->data.toggle.state =
+            (widget->data.toggle.state - 1) % (1 << widget->data.toggle.count);
+    }
+}
+
 void do_input_toggle(
     mftk_window *window,
     mftk_widget *widget,
@@ -41,61 +83,32 @@ void do_input_toggle(
     SDL_Event   *event
 )
 {
-    if (event->type != SDL_EVENT_MOUSE_BUTTON_DOWN && 
-        event->type != SDL_EVENT_MOUSE_WHEEL)
-    {
-        return;
-    }
+    int dy = mouse_y - (widget->y + 1) * MFTK_UNIT;
+    int dy2 = dy * dy;
+    
+    long state_prev = widget->data.toggle.state;
 
-    for (int i = 0; i < widget->data.toggle.count; i++)
+    int i;
+    for (i = 0; i < widget->data.toggle.count; i++)
     {
         int dx = mouse_x - (widget->x + 1 + 2 * i) * MFTK_UNIT;
-        int dy = mouse_y - (widget->y + 1) * MFTK_UNIT;
 
-        if (dx * dx + dy * dy <= MFTK_TOGGLE_RADIUS2)
+        if (dx * dx + dy2 > MFTK_TOGGLE_RADIUS2) continue;
+
+        switch(event->type)
         {
-            long state_prev = widget->data.toggle.state;
+            case SDL_EVENT_MOUSE_BUTTON_DOWN:
+            toggle_do_mouse_button_down(widget, event, i);
+            break;
 
-            if (event->type == SDL_EVENT_MOUSE_BUTTON_DOWN)
-            {
-                switch (event->button.button)
-                {
-                    /* left click: toggle individual switch on*/
-                    case 1:
-                    widget->data.toggle.state ^= 1 <<
-                        (widget->data.toggle.count - i - 1);
-                    break;
-
-                    /* middle click: reset row of switches to 0 */
-                    case 2:
-                    widget->data.toggle.state = 0;
-                    break;
-                }
-            }
-
-            else if (event->type == SDL_EVENT_MOUSE_WHEEL)
-            {
-                /* scroll up: increase switch row value*/
-                if (event->wheel.y > 0)
-                {
-                    widget->data.toggle.state =
-                        (widget->data.toggle.state + 1) %
-                        (1 << widget->data.toggle.count);
-                }
-
-                /* scroll down: decrease switch row value*/
-                else if (event->wheel.y < 0)
-                {
-                    widget->data.toggle.state =
-                        (widget->data.toggle.state - 1) %
-                        (1 << widget->data.toggle.count);
-                }
-            }
-
-            widget->data.toggle.trans_state =
-                widget->data.toggle.state ^ state_prev;
-
-            window->trans_counter = MFTK_TRANSITION_TIME;
+            case SDL_EVENT_MOUSE_WHEEL:
+            toggle_do_mouse_wheel(widget, event, i);
+            break;
         }
     }
+
+    widget->data.toggle.trans_state = widget->data.toggle.state ^ state_prev;
+
+    if (widget->data.toggle.trans_state)
+        window->trans_counter = MFTK_TRANSITION_TIME;        
 }

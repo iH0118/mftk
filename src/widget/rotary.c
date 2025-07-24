@@ -22,7 +22,7 @@ void draw_widget_rotary(
     );
 }
 
-void do_mouse_button_down(
+void rotary_do_mouse_button_down(
     mftk_window *window,
     mftk_widget *widget,
     int          mouse_x,
@@ -48,7 +48,7 @@ void do_mouse_button_down(
     }
 }
 
-void do_mouse_button_up(
+void rotary_do_mouse_button_up(
     mftk_window *window,
     mftk_widget *widget,
     SDL_Event   *event
@@ -66,7 +66,7 @@ void do_mouse_button_up(
     }
 }
 
-void do_mouse_wheel(
+void rotary_do_mouse_wheel(
     mftk_widget *widget,
     SDL_Event   *event
 )
@@ -82,7 +82,7 @@ void do_mouse_wheel(
     }
 }
 
-void do_mouse_motion(
+void rotary_do_mouse_motion(
     mftk_window *window,
     mftk_widget *widget,
     SDL_Event   *event
@@ -117,25 +117,24 @@ void do_input_rotary(
     int dx = mouse_x - (widget->x + 4) * MFTK_UNIT;
     int dy = mouse_y - (widget->y + 4) * MFTK_UNIT;
 
-    if (dx * dx + dy * dy <= MFTK_ROTARY_RADIUS2)
+    if (dx * dx + dy * dy > MFTK_ROTARY_RADIUS2) return;
+        
+    switch (event->type)
     {
-        switch (event->type)
-        {
-            case SDL_EVENT_MOUSE_BUTTON_DOWN:
-            do_mouse_button_down(window, widget, mouse_x, mouse_y, event);
-            break;
+        case SDL_EVENT_MOUSE_BUTTON_DOWN:
+        rotary_do_mouse_button_down(window, widget, mouse_x, mouse_y, event);
+        break;
 
-            case SDL_EVENT_MOUSE_BUTTON_UP:
-            do_mouse_button_up(window, widget, event);
-            break;
+        case SDL_EVENT_MOUSE_BUTTON_UP:
+        rotary_do_mouse_button_up(window, widget, event);
+        break;
 
-            case SDL_EVENT_MOUSE_WHEEL:
-            do_mouse_wheel(widget, event);
-            break;
+        case SDL_EVENT_MOUSE_WHEEL:
+        rotary_do_mouse_wheel(widget, event);
+        break;
 
-            case SDL_EVENT_MOUSE_MOTION:
-            do_mouse_motion(window, widget, event);
-            break;
-        }
+        case SDL_EVENT_MOUSE_MOTION:
+        rotary_do_mouse_motion(window, widget, event);
+        break;
     }
 }
