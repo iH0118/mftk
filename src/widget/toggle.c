@@ -1,9 +1,8 @@
 #include "toggle.h"
 
 #include "../texture.h"
-#include <SDL3/SDL_events.h>
 
-void draw_widget_toggle(
+void mftk_draw_widget_toggle(
     mftk_window *window,
     mftk_widget *widget
 )
@@ -12,14 +11,14 @@ void draw_widget_toggle(
     {
         long state_offset = widget->data.toggle.count - i - 1;
 
-        blit(
+        mftk_blit(
             window->renderer,
             window->texture_set.toggle.base,
             (widget->x + 2 * i) * MFTK_UNIT + 2,
             widget->y * MFTK_UNIT + 1
         );
 
-        blit(
+        mftk_blit(
             window->renderer,
             (widget->data.toggle.trans_state >> state_offset) & 1
                 ? window->texture_set.toggle.center
@@ -30,11 +29,14 @@ void draw_widget_toggle(
             widget->y * MFTK_UNIT + 1
         );
 
-        if (!window->trans_counter) widget->data.toggle.trans_state = 0;
+        if (!window->trans_counter)
+        {
+            widget->data.toggle.trans_state = 0;
+        }
     }
 }
 
-void toggle_do_mouse_button_down(
+void mftk_toggle_do_mouse_button_down(
     mftk_widget *widget,
     SDL_Event   *event,
     int          i
@@ -54,7 +56,7 @@ void toggle_do_mouse_button_down(
     }
 }
 
-void toggle_do_mouse_wheel(
+void mftk_toggle_do_mouse_wheel(
     mftk_widget *widget,
     SDL_Event   *event,
     int          i
@@ -75,7 +77,7 @@ void toggle_do_mouse_wheel(
     }
 }
 
-void do_input_toggle(
+void mftk_do_input_toggle(
     mftk_window *window,
     mftk_widget *widget,
     int          mouse_x,
@@ -88,21 +90,23 @@ void do_input_toggle(
     
     long state_prev = widget->data.toggle.state;
 
-    int i;
-    for (i = 0; i < widget->data.toggle.count; i++)
+    for (int i = 0; i < widget->data.toggle.count; i++)
     {
         int dx = mouse_x - (widget->x + 1 + 2 * i) * MFTK_UNIT;
 
-        if (dx * dx + dy2 > MFTK_TOGGLE_RADIUS2) continue;
+        if (dx * dx + dy2 > MFTK_TOGGLE_RADIUS2)
+        {
+            continue;
+        }
 
         switch(event->type)
         {
             case SDL_EVENT_MOUSE_BUTTON_DOWN:
-            toggle_do_mouse_button_down(widget, event, i);
+            mftk_toggle_do_mouse_button_down(widget, event, i);
             break;
 
             case SDL_EVENT_MOUSE_WHEEL:
-            toggle_do_mouse_wheel(widget, event, i);
+            mftk_toggle_do_mouse_wheel(widget, event, i);
             break;
         }
     }
@@ -110,5 +114,7 @@ void do_input_toggle(
     widget->data.toggle.trans_state = widget->data.toggle.state ^ state_prev;
 
     if (widget->data.toggle.trans_state)
+    {
         window->trans_counter = MFTK_TRANSITION_TIME;        
+    }
 }

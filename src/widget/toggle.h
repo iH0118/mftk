@@ -3,12 +3,12 @@
 
 #include "../common.h"
 
-void draw_widget_toggle(
+void mftk_draw_widget_toggle(
     mftk_window *window,
     mftk_widget *widget
 );
 
-void do_input_toggle(
+void mftk_do_input_toggle(
     mftk_window *window,
     mftk_widget *widget,
     int          mouse_x,

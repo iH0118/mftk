@@ -8,7 +8,7 @@ mftk_widget *mftk_get_widget(
     const char  *label
 );
 
-mftk_widget *create_widget_from_node(
+mftk_widget *mftk_create_widget_from_node(
     cJSON *node
 );
 

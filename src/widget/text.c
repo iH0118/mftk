@@ -4,7 +4,7 @@
 #include "../texture.h"
 #include "../util.h"
 
-void draw_widget_text(
+void mftk_draw_widget_text(
     mftk_window *window,
     mftk_widget *widget
 )
@@ -18,11 +18,14 @@ void draw_widget_text(
     {
         char c = widget->data.text.text[i];
 
-        if (c < 0x20 || c > 0x7E) return;
+        if (c < ' ' || c > '~') 
+        {
+            return;
+        }
 
-        blit(
+        mftk_blit(
             window->renderer,
-            window->texture_set.letter[c - 0x20],
+            window->texture_set.letter[c - ' '],
             start_x + 6 * i,
             widget->y * MFTK_UNIT + 2
         );
@@ -45,7 +48,7 @@ void draw_widget_text(
     }
 }
 
-void draw_widget_text_count(
+void mftk_draw_widget_text_count(
     mftk_window *window,
     mftk_widget *widget
 )
@@ -54,15 +57,15 @@ void draw_widget_text_count(
     {
         int number = widget->data.text_count.start +
             i * widget->data.text_count.step;
-        int text_len = get_number_digits(number);
+        int text_len = mftk_count_digits(number);
         int center_x = (widget->x + 2 * i + 1) * MFTK_UNIT;
         int start_x = center_x - 2 - 3 * (text_len);
 
         for (int k = text_len; k >= 0; k--) 
         {
-            blit(
+            mftk_blit(
                 window->renderer,
-                window->texture_set.letter[(number % 10) + '0' - 0x20],
+                window->texture_set.letter[(number % 10) + '0' - ' '],
                 start_x + 6 * k,
                 widget->y * MFTK_UNIT + 2
             );

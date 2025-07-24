@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-SDL_Color get_json_color(
+SDL_Color mftk_get_json_color(
     cJSON *color_json
 )
 {
@@ -14,7 +14,7 @@ SDL_Color get_json_color(
     return color;
 }
 
-mftk_widget_type get_widget_type(
+mftk_widget_type mftk_get_widget_type(
     const char *type
 )
 {
@@ -29,10 +29,14 @@ mftk_widget_type get_widget_type(
     return -1;
 }
 
-int get_number_digits(
+int mftk_count_digits(
     int n
 )
 {
-    if (n / 10) return get_number_digits(n / 10) + 1;
+    if (n / 10)
+    {
+        return mftk_count_digits(n / 10) + 1;
+    }
+
     return 0;
 }

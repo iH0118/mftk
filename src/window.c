@@ -39,21 +39,20 @@ mftk_window *mftk_create_window_json(
     cJSON *root = cJSON_Parse(ui_json);
     cJSON *window_json = cJSON_GetObjectItem(root, "window");
     cJSON *widgets_json = cJSON_GetObjectItem(root, "widgets");
-    cJSON *node;
 
     mftk_window *window = mftk_create_window(
         cJSON_GetObjectItem(window_json, "title")->valuestring,
         cJSON_GetObjectItem(window_json, "width")->valueint,
         cJSON_GetObjectItem(window_json, "height")->valueint,
-        get_json_color(cJSON_GetObjectItem(window_json, "color_bg"))
+        mftk_get_json_color(cJSON_GetObjectItem(window_json, "color_bg"))
     );
 
     mftk_widget **widget_next = &(window->widget_top);
     mftk_widget *widget_prev = NULL;
 
-    for (node = widgets_json->child; node; node = node->next)
+    for (cJSON *node = widgets_json->child; node; node = node->next)
     {
-        mftk_widget *widget = create_widget_from_node(node);
+        mftk_widget *widget = mftk_create_widget_from_node(node);
 
         *widget_next = widget;
         widget_next = &(widget->next);
@@ -84,5 +83,8 @@ void mftk_draw_window(
         mftk_draw_widget(window, node);
     }
 
-    if (window->trans_counter) window->trans_counter -= 1;
+    if (window->trans_counter)
+    {
+        window->trans_counter -= 1;
+    }
 }

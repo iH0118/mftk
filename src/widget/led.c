@@ -2,14 +2,14 @@
 
 #include "../texture.h"
 
-void draw_widget_led_amber(
+void mftk_draw_widget_led_amber(
     mftk_window *window,
     mftk_widget *widget
 )
 {
     for (int i = 0; i < widget->data.led.count; i++)
     {
-        blit(
+        mftk_blit(
             window->renderer,
             widget->data.led.state >> (widget->data.led.count - i - 1) & 1
                 ? window->texture_set.led_amber.on
@@ -20,14 +20,14 @@ void draw_widget_led_amber(
     }
 }
 
-void draw_widget_led_red(
+void mftk_draw_widget_led_red(
     mftk_window *window,
     mftk_widget *widget
 )
 {
     for (int i = 0; i < widget->data.led.count; i++)
     {
-        blit(
+        mftk_blit(
             window->renderer,
             widget->data.led.state >> (widget->data.led.count - i - 1) & 1
                 ? window->texture_set.led_red.on

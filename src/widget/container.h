@@ -3,7 +3,7 @@
 
 #include "../common.h"
 
-void draw_widget_container(
+void mftk_draw_widget_container(
     mftk_window *window,
     mftk_widget *widget
 );

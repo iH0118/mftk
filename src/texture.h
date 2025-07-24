@@ -7,7 +7,7 @@ void mftk_init_textures(
     mftk_window *window
 );
 
-void blit(
+void mftk_blit(
     SDL_Renderer *renderer,
     SDL_Texture  *texture,
     int           x,

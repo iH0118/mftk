@@ -3,12 +3,12 @@
 
 #include "../common.h"
 
-void draw_widget_rotary(
+void mftk_draw_widget_rotary(
     mftk_window *window,
     mftk_widget *widget
 );
 
-void do_input_rotary(
+void mftk_do_input_rotary(
     mftk_window *window,
     mftk_widget *widget,
     int          mouse_x,

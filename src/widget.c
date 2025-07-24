@@ -14,17 +14,22 @@ mftk_widget *mftk_get_widget(
 )
 {
     mftk_widget *node = window->widget_top;
-    while (node && strcmp(node->label, label)) node = node->next;
+
+    while (node && strcmp(node->label, label))
+    {
+        node = node->next;
+    }
+
     return node;
 }
 
-mftk_widget *create_widget_from_node(
+mftk_widget *mftk_create_widget_from_node(
     cJSON *node
 )
 {
     mftk_widget *widget = calloc(1, sizeof(mftk_widget));
 
-    widget->type = get_widget_type(
+    widget->type = mftk_get_widget_type(
         cJSON_GetObjectItem(node, "type")->valuestring
     );
 
@@ -42,7 +47,7 @@ mftk_widget *create_widget_from_node(
             cJSON_GetObjectItem(data, "size_x")->valueint;
         widget->data.container.size_y =
             cJSON_GetObjectItem(data, "size_y")->valueint;
-        widget->data.container.color = get_json_color(
+        widget->data.container.color = mftk_get_json_color(
             cJSON_GetObjectItem(data, "color")
         );
         break;
@@ -94,32 +99,32 @@ void mftk_draw_widget(
     switch (widget->type)
     {
         case MFTK_CONTAINER:
-        draw_widget_container(window, widget);
+        mftk_draw_widget_container(window, widget);
         break;
 
         case MFTK_TOGGLE:
         case MFTK_TOGGLE_MOM:
-        draw_widget_toggle(window, widget);
+        mftk_draw_widget_toggle(window, widget);
         break;
 
         case MFTK_LED_AMBER:
-        draw_widget_led_amber(window, widget);
+        mftk_draw_widget_led_amber(window, widget);
         break;
 
         case MFTK_LED_RED:
-        draw_widget_led_red(window, widget);
+        mftk_draw_widget_led_red(window, widget);
         break;
 
         case MFTK_ROTARY:
-        draw_widget_rotary(window, widget);
+        mftk_draw_widget_rotary(window, widget);
         break;
 
         case MFTK_TEXT:
-        draw_widget_text(window, widget);
+        mftk_draw_widget_text(window, widget);
         break;
 
         case MFTK_TEXT_COUNT:
-        draw_widget_text_count(window, widget);
+        mftk_draw_widget_text_count(window, widget);
         break;
     }
 }

@@ -3,15 +3,15 @@
 
 #include "common.h"
 
-SDL_Color get_json_color(
+SDL_Color mftk_get_json_color(
     cJSON *color_json
 );
 
-mftk_widget_type get_widget_type(
+mftk_widget_type mftk_get_widget_type(
     const char *type
 );
 
-int get_number_digits(
+int mftk_count_digits(
     int n
 );
 

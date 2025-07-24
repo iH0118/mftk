@@ -366,7 +366,7 @@ void mftk_init_textures(
     }
 }
 
-void blit(
+void mftk_blit(
     SDL_Renderer *renderer,
     SDL_Texture  *texture,
     int           x,
